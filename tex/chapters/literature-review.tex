@@ -4,6 +4,17 @@
 \section{Preliminaries}
 \label{sec:LitReviewPrelim}
 
+\section{Why Map the Internet?}
+\label{sec:LitReviewWhyMap}
+
+The main aim of this project is to embed a representation of the internet into hyperbolic space and produce a visualisation of this embedding. In order to fully understand why this is useful, we must ask the question: why do we need a map of the internet? 
+
+Each node on the internet is capable of detecting which nodes it is connected to, however, it is not possible without special software to see beyond this. As each node only has local data it is not possible for them to form a complete model of the internet themselves and they must cooperate with other nodes to do this. Of course, this means that in order to gain a complete model of the internet it would be necessary to communicate with almost all of the nodes currently connected to it. Having a pre-computed map of the internet allows a node to know more about the global internet it is connected to without having to query almost every other node. 
+
+Understanding the physical structure of the internet is something that network engineers have to deal with every day, however it can often be difficult to pinpoint problems in networks. For example, in standard Ethernet networks, the presence of a loop can often create a broadcast storm which can render entire parts of a network unusable due to packet flooding. If an accurate map of the network is known in advance then it is possible for an engineer to locate the fault more quickly as they can compare this map to the current state of the network and check to see if any new connections have been added which may be causing the loop. 
+
+While maps may assist engineers on small scale problems they can also assist in diagnosing problems which affect the internet on a more global scale. For example, despite the extreme interconnectedness of the internet it is still possible for a specific node or link to become congested. Congestion of a node or link can cause severe packet loss making data transmission unreliable across the affected area. Having an accurate map of the internet would allow for quick diagnosis of the fault, as well as pinpointing the cause. Though it may have been possible without a map to easily find the affected nodes or links it would be far more difficult to find the cause of the issue. With a map, it is possible to identify features such as a large number of new nodes which may have caused increased data transmission across the affected area. Additionally, a map of the internet with a geographical element may assist in locating pairs of nodes which could receive additional links or additional bandwidth on existing links. 
+
 \section{Hyperbolic Space}
 \label{sec:LitReviewHyperbolicSpace}
 
