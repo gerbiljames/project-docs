@@ -56,10 +56,42 @@ Euclidean geometry (postulated by Euclid in around 300 B.C. \cite{ratcliffe_foun
 
 The first four of these postulates seem both simple and natural, however the fifth is more involved and it is not immediately apparent what is being described by it. Euclid's fifth postulate effectively states that given a straight line and a point, there is only \textbf{one} straight line which passes through the point and is parallel to the original straight line. 
 
-When considering the first four postulates it is easy to see that they should simply be accepted without proof due to their simplicity. However, the fifth postulate cannot be so easily accepted. A solution to this is to attempt to prove the fifth postulate using the others, something which was attempted for over two thousand years \cite{ratcliffe_foundations_2006} but was not possible. The only remaining hypothesis is that the fifth postulate is not required for a definition of a geometry!
+When considering the first four postulates it is easy to see that they should simply be accepted without proof due to their simplicity. However, the fifth postulate cannot be so easily accepted. A solution to this is to attempt to prove the fifth postulate using the others, something which was attempted for over two thousand years \cite{ratcliffe_foundations_2006} but was not possible. The only remaining hypothesis is that the fifth postulate is not required for a definition of a geometry.
 
 This seems absurd, as it is relatively simple to demonstrate in two dimensional Euclidean geometry that the fifth postulate holds, using only a piece of paper and a pencil. However, this does not prove that the postulate holds in all cases, only in this one instance. In order to refute the postulate, it is necessary cast out this rigid view of a flat plane and to consider other geometries in which to work. 
 
-If, instead of a plane, all geometry took place on the surface of a sphere then very different behaviour is observed. Of course, the surface of the sphere is a two dimensional plane but with one key difference: it is finite. On this finite plane a straight line is any which is a great circle of the sphere. In this case, it is clear that any straight line must have \textbf{zero} straight lines which are parallel to it, as all great circles must meet at exactly two points. This is in direct violation of Euclid's fifth postulate, however this \textit{spherical geometry} still constitutes a valid definition of geometry. Clearly, the fifth postulate is not required in order to define a geometry.
+If, instead of a plane, all geometry took place on the surface of a sphere then very different behaviour is observed. Of course, the surface of the sphere is a two dimensional plane but with one key difference: it is finite. On this finite plane a straight line is any which is a great circle of the sphere. In this case, it is clear that any straight line must have \textbf{zero} straight lines which are parallel to it, as all pairs of great circles must meet at exactly two points. This is in direct violation of Euclid's fifth postulate, however this \textit{spherical geometry} still constitutes a valid definition of geometry. Clearly, the fifth postulate is not required in order to define a geometry.
 
-This being the case would suggest that geometries can be defined in such a way that a straight line has any number of parallels through a point. Indeed, a geometry exists in which each straight line has many parallels through a point: \textit{hyperbolic geometry} \cite{munzner_visualizing_1995}. This type of geometry is more difficult to visualise in Euclidean space than spherical geometry but is not restricted to a finite plane. Unlike spherical geometry, which has a \textit{positive curvature}, hyperbolic geometry has a \textit{negative curvature} which, put simply, causes the amount of available space to expand in every direction. This statement becomes more evident when the area of a circle in each geometry is considered. In euclidean space, a circles area grows linearly with its radius whereas in hyperbolic space this growth is exponential \cite{munzner_visualizing_1995}. 
+This being the case would suggest that geometries can be defined in such a way that a straight line has any number of parallels through a point. Indeed, a geometry exists in which each straight line has many parallels through a point: \textit{hyperbolic geometry} \cite{munzner_visualizing_1995}. This type of geometry is more difficult to visualise in Euclidean space than spherical geometry but is not restricted to a finite plane. Unlike spherical geometry, which has a \textit{constant positive curvature}, hyperbolic geometry has a \textit{constant negative curvature} which, put simply, causes the amount of available space to expand in every direction. This statement becomes more evident when the area of a circle in each geometry is considered. In euclidean space, a circles area grows linearly with its radius whereas in hyperbolic space this growth is exponential \cite{munzner_visualizing_1995}.
+
+\section{Models of Hyperbolic Space}
+\label{sec:LitReviewVisHyperbolic}
+
+Upon considering the implications of a geometry in which space expands in all directions, a problem arises: how can this be modelled in a space which does not exhibit the same expanding property? Unfortunately, in order to do so, it is necessary to appear to distort some properties of the space.
+
+\subsection{The Poincar\'{e} Disc Model}
+
+One such model of hyperbolic space is the Poincar\'{e} disc model, known henceforth as the \textit{disc model}. If we imagine an attempt to visualise hyperbolic space within euclidean space then we encounter a problem, as we effectively cannot fit the expanding hyperbolic space into the \textit{smaller} Euclidean space. Supposing we wished to visualise the entire, infinite hyperbolic space in a finite subspace of Euclidean space we must compress it. As there is infinite hyperbolic space to compress this visualisation must contain points of infinite compression.
+ 
+In the disc model, an infinite hyperbolic space is compressed into a Euclidean circle with the space becoming more and more compressed as it moves further from the centre of the circle and becoming infinitely compressed at the circle itself. This model represents hyperbolic straight lines as curved euclidean lines, unless the line travels directly across the space in which case it appears as a straight euclidean line.
+
+An example of this is shown in figure \ref{fig:poincare_example}. Here, four separate straight hyperbolic lines have been drawn on a hyperbolic plane and then visualised in Euclidean space using the disc model. Though these lines do not appear straight in Euclidean space the negative curvature of the hyperbolic space causes their apparent curvature in this model. Though this model distorts the apparent straightness of lines it does preserve the angles between lines in true hyperbolic space.
+
+\begin{figure}
+	\includegraphics[width=0.5\textwidth]{PoincareDisc.png}
+	\caption[A visualisation of the Poincar\'{e} disc model with four hyperbolic straight lines]{A visualisation of the Poincar\'{e} disc model with four hyperbolic straight lines \protect{\cite{poincare_model_web_page}}.}
+	\label{fig:poincare_example}
+\end{figure}
+
+\subsection{The Beltrami-Klein Model}
+
+The Beltrami-Klein model of hyperbolic geometry, known henceforth as the \textit{projective model} addresses the issue of the distortion of the straightness of lines but introduces a distortion of angle. This angular distortion is accounted for by effectively bending the hyperbolic space as it is mapped into euclidean space. 
+
+The same infinite compression as seen in the disc model still exists in the projective model. Figure \ref{fig:klein_example} provides an example of the model containing three straight lines. In this diagram the two topmost lines are parallel to the bottom line and both pass through the same point, an important property of hyperbolic space.
+
+
+\begin{figure}
+	\includegraphics[width=0.5\textwidth]{Klein_model.png}
+	\caption[A visualisation of the Beltrami-Klein model with three hyperbolic straight lines]{A visualisation of the Beltrami-Klein model with three hyperbolic straight lines \protect{\cite{klein_model_image}}.}
+	\label{fig:klein_example}
+\end{figure}
