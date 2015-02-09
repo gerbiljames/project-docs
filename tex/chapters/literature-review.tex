@@ -64,6 +64,8 @@ If, instead of a plane, all geometry took place on the surface of a sphere then 
 
 This being the case would suggest that geometries can be defined in such a way that a straight line has any number of parallels through a point. Indeed, a geometry exists in which each straight line has many parallels through a point: \textit{hyperbolic geometry} \cite{munzner_visualizing_1995}. This type of geometry is more difficult to visualise in Euclidean space than spherical geometry but is not restricted to a finite plane. Unlike spherical geometry, which has a \textit{constant positive curvature}, hyperbolic geometry has a \textit{constant negative curvature} which, put simply, causes the amount of available space to expand in every direction. This statement becomes more evident when the area of a circle in each geometry is considered. In euclidean space, a circles area grows linearly with its radius whereas in hyperbolic space this growth is exponential \cite{munzner_visualizing_1995}.
 
+Another interesting property of modifying the fifth postulate is the difference in the sum of the angles in a triangle. A euclidean triangle contains interior angles which sum to $\pi$ exactly. In spherical geometry all triangles have interior angles which sum to between $\pi$ and 3$\pi$, whereas in hyperbolic geometry all triangles have interior angles which sum to less than $\pi$. This may seem strange as it permits triangles which have angles that sum to zero, but this is possible for triangles which have infinite size.
+
 \section{Models of Hyperbolic Space}
 \label{sec:LitReviewVisHyperbolic}
 
@@ -78,6 +80,7 @@ In the disc model, an infinite hyperbolic space is compressed into a Euclidean c
 An example of this is shown in figure \ref{fig:poincare_example}. Here, four separate straight hyperbolic lines have been drawn on a hyperbolic plane and then visualised in Euclidean space using the disc model. Though these lines do not appear straight in Euclidean space the negative curvature of the hyperbolic space causes their apparent curvature in this model. Though this model distorts the apparent straightness of lines it does preserve the angles between lines in true hyperbolic space.
 
 \begin{figure}
+	\centering
 	\includegraphics[width=0.5\textwidth]{PoincareDisc.png}
 	\caption[A visualisation of the Poincar\'{e} disc model with four hyperbolic straight lines]{A visualisation of the Poincar\'{e} disc model with four hyperbolic straight lines \protect{\cite{poincare_model_web_page}}.}
 	\label{fig:poincare_example}
@@ -85,13 +88,26 @@ An example of this is shown in figure \ref{fig:poincare_example}. Here, four sep
 
 \subsection{The Beltrami-Klein Model}
 
-The Beltrami-Klein model of hyperbolic geometry, known henceforth as the \textit{projective model} addresses the issue of the distortion of the straightness of lines but introduces a distortion of angle. This angular distortion is accounted for by effectively bending the hyperbolic space as it is mapped into euclidean space. 
+The Beltrami-Klein model of hyperbolic geometry, known henceforth as the \textit{projective model} addresses the issue of the distortion of the straightness of lines but introduces a distortion of angle.
 
-The same infinite compression as seen in the disc model still exists in the projective model. Figure \ref{fig:klein_example} provides an example of the model containing three straight lines. In this diagram the two topmost lines are parallel to the bottom line and both pass through the same point, an important property of hyperbolic space.
-
+The same infinite compression seen in the disc model still exists in the projective model. Figure \ref{fig:klein_example} provides an example of the model containing three straight lines. In this diagram the two topmost lines are parallel to the bottommost line and both pass through the same point, an important property of hyperbolic space. An advantage of this model is that straight hyperbolic lines appear as straight euclidean lines. However, as the space has effectively been bent, euclidean angles in this model do not correspond to the same hyperbolic angles and this must be accounted for if the correct modelling of angles is important. Of course, if it is not important for angles to be accurate in the visualisation then this model is ideal. 
 
 \begin{figure}
+	\centering
 	\includegraphics[width=0.5\textwidth]{Klein_model.png}
 	\caption[A visualisation of the Beltrami-Klein model with three hyperbolic straight lines]{A visualisation of the Beltrami-Klein model with three hyperbolic straight lines \protect{\cite{klein_model_image}}.}
 	\label{fig:klein_example}
+\end{figure}
+
+\subsection{The Poincar\'{e} Half-Plane Model}
+
+Both models discussed previously represent the infinite hyperbolic plane inside a finite Euclidean circle, the Poincar\'{e} half-plane model, known henceforth as the \textit{half-plane} model, does not. Instead, the infinite hyperbolic space is plotted in the upper-half plane. This is a complex plane which consists of all complex numbers with a positive imaginary part. 
+
+Figure \ref{fig:half-plane-example} shows an example of the half-plane model in which five straight lines have been plotted. In this example all of the lines on the right are parallel to the leftmost line, additionally the lines on the right also pass through a single point. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{upper-half-plane.png}
+	\caption[A visualisation of the Poincar\'{e} half-plane model with five hyperbolic straight lines]{A visualisation of the Poincar\'{e} half-plane model with five hyperbolic straight lines \protect{\cite{half_plane_example}}.}
+	\label{fig:half-plane-example}
 \end{figure}
