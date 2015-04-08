@@ -1,0 +1,59 @@
+\chapter{Design and Methodology}
+\label{cha:Design}
+
+\section{Platform and Programming Language}
+\label{sec:DesignLanguage}
+
+\section{Data Sources}
+\label{sec:DesignDataSources}
+As the primary aim of this project is to create and visualise an embedding of the internet it is necessary to collect data describing its structure on which to base the embedding. Using Autonomous Systems as the subject of the mapping serves to make data collection easier, however the following data is required for each system if an embedding is to be created:
+
+\begin{itemize}
+	\item{Organisation and ID}
+	\item{Relationships between Autonomous Systems}
+	\item{Location}
+\end{itemize}
+
+\subsection{Organisation and ID}
+Though it may seem trivial, finding a dataset which contains a mapping of Autonomous System Numbers (ASNs) to the organisation that owns them was not straightforward. At first attempt, the use of the program \textit{whois} was considered as it is possible to query it with an ASN in order to retrieve the owner as well as further data which could have been used to identify relationships between ASes. However, upon testing several queries it became clear that the information provided by \textit{whois} was not consistent across RIRs. Further, executing an external program, which requires an internet connection, for each AS would add a large amount of overhead to the application. 
+
+If it was not possible to connect to the internet to retrieve the data for each AS individually then a pre-compiled dataset is required. Of course, if a database could be found that contains all required data then the choice would be simple, however no such database exists. Instead, each piece of data described earlier must be obtained from separate databases. 
+
+In order to begin enumerating ASes a dataset which contains the ASNs for all systems must be used. There are several web pages (for example \textit{bgp.potaroo.net/cidr/autnums.html}) which simply list all known ASNs along with their organisation, however the system through which this data is collected is unclear and the formatting of the web pages make them difficult to parse. 
+
+Clearly, some form of downloadable database is required which would allow the application to have fast access to all available AS data. One such dataset is provided by the Center for Applied Internet Data Analysis (CAIDA) and contains several different files which provide both ASN and organisation data. Further, this data is provided for free to educational users. The files themselves are simply text files which can be parsed easily in Python. The method through which the data is collected is clearly outlined on the website as well as how often new data is published. This dataset provides a reliable way of enumerating ASes and finding to which organisation they belong.
+
+\subsection{Relationships between Autonomous Systems}
+Without data describing the relationships between ASes it would not be possible to create an embedding. Collecting this data will allow the physical connections between ASes to be determined, which, when used in conjunction with location data, provides enough information to calculate the distances between connected ASes.
+
+Again, use of the \textit{whois} application was considered but the flaws of this method definitely outweigh its advantages. Again, CAIDA provides a convenient dataset named \textit{AS Relationships} which contains the inferred relationships between ASes where each relationship represents a physical connection. This dataset is provided free for educational use and contains a text file which can be easily parsed in Python. 
+
+\subsection{Location}
+Determining the geographical location of an AS provides a way to determine distances between ASes, an operation which is required in order to create an embedding. Upon searching for a dataset which contained the locations of all ASes it became apparent that no such dataset existed. This was primarily because an AS does not have a single location, it is possible for an AS to span a very large geographic area. This issue caused a significant setback in the projects design, how would it be possible to retrieve location data for an entity which does not have a singular location?
+
+When considering the solution to this problem it became apparent that in order to retrieve location data for an AS it needed to have a component for which a location could be determined. Physical internet components such as routers have a defined location, and each component can be identified by its IP address. There are many services which can retrieve location data for an IP address, such as MaxMinds GeoIP (\textit{http://dev.maxmind.com/geoip/}). 
+
+Having determined that it is possible to determine a location for an IP address the next step is to find an IP address for an AS. This is not as simple as using a service to perform a lookup as there are no providers for this type of data. There is, however, a Python module which provides IP to ASN lookups known as pyasn (https://pypi.python.org/pypi/pyasn). Though this may not seem useful it is possible to use the module to perform a reverse lookup for all known IP addresses in a specific AS. This module operates by providing functions to parse the current BGP table, converting it into a format which can be read by pyasn. This data is then used to perform lookups for which IP addresses route to which ASN.
+
+Once this list of IP addresses is obtained it is then possible to determine the location of one of them. This can be done through the use of an IP geolocation service. Python bindings exist for many of these services, of which \textit{python-geoip} (\textit{http://pythonhosted.org/python-geoip/}) is one. This library contains functionality for downloading a database ahead of time for fast access. As all of the data required for this project is available locally on disk, the initial start up of the application should be significantly faster. 
+
+\section{Further Data Considerations}
+
+This section aims to outline any further considerations which were raised during development of this project.
+
+\subsection{Dataset Size}
+
+Upon inspecting the datasets chosen for this project it became apparent that volume of data available was very large. Due to the calculations that must be performed in order to create an embedding a very large amount of memory is required. This is not feasible as access to a machine with enough RAM is not possible, therefore one of two workarounds must be employed: either store the data somewhere other than RAM or reduce the size of the data. 
+
+The specific point in the application at which the data becomes very large will occur when calculating the distance matrix for all ASes. This matrix will be square with dimensions equal to the number of ASes. Attempts must be made to reduce the size of this matrix or the aims of the project cannot be fulfilled.
+
+Storing the data outside of RAM would seem difficult in this case, but it is possible. In order to implement such a system in Python, a technology called Hierarchical Data Format (HDF) can be used. This allows for the creation of disk backed variable storage within Python that acts as though the object is stored in RAM. Access to the data would of course be slower than traditional variables but RAM is no longer a constraint. However, as the data being stored is a matrix it must support all of the numpy matrix operators. While the Python bindings for HDF (h5py) do support numpy, they do not support performing matrix operations on data backed by HDF. HDF is not a viable candidate to solve this problem for this reason.
+
+While moving the data out of RAM may seem like a convenient solution, it is impossible to maintain compatibility with numpy while performing such an abstraction. Instead it would be easier to attempt to minimise or compress the data. An interesting property of the distance matrix which may allow for effective compression is that most of the matrix is zero. The scipy library contains a \textit{sparse} matrix class which is effectively compressed and performs very well on matrices which contain many occurrences of the same value. Unfortunately, it is extremely inefficient to modify such a matrix heavily once it has been created which is a feature required for the construction of an embedding. 
+
+Having exhausted all other lines of enquiry it is necessary to consider using a smaller dataset than initially intended. Unfortunately, this is not as simple as only using the first 1000 ASes, for example, as it is possible (though unlikely) for no relationships to exist between any of those ASes. Instead, the subset must be chosen carefully so as to eliminate any ASes which have zero links to the rest of the subset. One system which could be used to achieve this would be to follow the links from a specific AS to a set depth and use all ASes found as a subset. This could be implemented recursively and would provide a consistent way to generate small subsets of the main dataset.
+
+\subsection{Data Availability}
+While the chosen data sources contain relatively complete data for most ASes it is impossible to have full coverage. Of particular note is the unavailability of an IP address for some ASes. This is due to these systems having no IP address ranges which route to them, which is fairly common. Unfortunately, if it is not possible to determine a valid IP address for an AS it is not possible to determine its location. If an AS has no known location it cannot be part of the embedding as its distance from other ASes cannot be calculated. 
+
+For this reason, it is necessary to validate the dataset before it is processed by filtering out any AS for which there is incomplete data. While this may seem an extreme measure there is no alternative as any ASes which have missing data are useless. Further, performing this validation before the data subset is generated means that any ASes which are eliminated cannot be followed by the recursive algorithm. This effectively prevents any ASes which may have been orphaned from being included in the embedding, which may have cause the embedding process to fail. 
