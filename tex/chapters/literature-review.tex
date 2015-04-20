@@ -36,11 +36,10 @@ Though this representation may seem sound, there are issues which prevent the in
 
 Further, the graph of AS connections is not a true tree due to the links between provider ASes effectively being undirected \cite{di_battista_computing_2003}. A tree must have directional links in order to determine which nodes are parents and which are children. This distinction becomes blurred when using a tree to describe the structure of the internet as all provider ASes are effectively equal, it is not possible to say that one provider AS is the child of another and this assertion has no meaning. A further, but minor, difference is that such a tree has no root node. 
 
-These issues make it impossible to represent the internet, at the level of autonomous systems, as a tree but it could be said that the structure is \textit{tree-like} with internal and leaf nodes which provide a hierarchical structure which can be represented as a graph. TODO!!!
+These issues make it impossible to represent the internet, at the level of autonomous systems, as a tree but it could be said that the structure is \textit{tree-like} with internal and leaf nodes which provide a hierarchical structure which can be represented as a graph.
 
 \section{Hyperbolic Space}
 \label{sec:LitReviewHyperbolicSpace}
-
 Hyperbolic space (or, more broadly, hyperbolic geometry) is by no means a recent concept and was postulated by Carl Friedrich Gauss in 1824 \cite{ratcliffe_foundations_2006}. In order to understand what hyperbolic geometry is, it is first necessary to review what is often described as standard: Euclidean geometry.
 
 Euclidean geometry (postulated by Euclid in around 300 B.C. \cite{ratcliffe_foundations_2006}) is based upon five postulates, which Euclid described as follows \cite{ratcliffe_foundations_2006}:
@@ -122,7 +121,7 @@ The Beltrami-Klein model of hyperbolic geometry, known henceforth as the \textit
 
 The projective model is again defined in two-dimensional Euclidean space as the open unit disc, given earlier in equation \ref{eq:open_unit_disc_eq}. A geodesic, in the projective model is any chord of the unit disc. Indeed, for a geodesic in the disc model which has ideal points A and B it is trivial to determine the equivalent in the projective model, it is simply the chord AB.
 
-The method for calculating distance in the projective model differs slightly from the disc model and the distance between points A and B is defined as:
+The method for calculating distance in the projective model differs slightly from the disc model and the distance between points A and B is defined as \cite{milnor_hyperbolic_1982}:
 
 \begin{equation}
 \label{distance_disc_model}
@@ -143,14 +142,14 @@ Figure \ref{fig:klein_example} provides an example of the model containing three
 As the model is not conformal, it is difficult to measure Hyperbolic angles given only the Euclidean representation of the model. Instead of attempting to measure angles directly, it is far more simple to convert to a conformal model and measure Euclidean angles directly. Fortunately, a simple conversion exists from the projective model to the disc model:
 
 \begin{equation}
-\label{distance_disc_model}
+\label{projective_to_disc}
 u=\frac{(1-\sqrt{1-s\cdot{}s})s}{s\cdot{}s}
 \end{equation}
 
 Where $s$ is a vector representing a point in the projective model and $u$ is its equivalent in the disc model. A similar conversion exists in the opposite direction and is given by:
 
 \begin{equation}
-\label{distance_disc_model}
+\label{disc_to_projective}
 s=\frac{2u}{1+u\cdot{}u}
 \end{equation}
 
@@ -160,7 +159,7 @@ It is important to note that both the disc and projective models map Hyperbolic 
 
 \subsection{The Poincar\'{e} Half-Plane Model}
 
-Both models discussed previously represent the infinite hyperbolic plane inside a finite Euclidean circle, the Poincar\'{e} half-plane model, known henceforth as the \textit{half-plane} model, does not. Instead, the infinite hyperbolic space is plotted in the upper-half plane, defined as:
+Both models discussed previously represent the infinite hyperbolic plane inside a finite Euclidean circle, the Poincar\'{e} half-plane model, known henceforth as the \textit{half-plane} model, does not. Instead, the infinite hyperbolic space is plotted in the upper-half plane, defined as \cite{kubo_geometry_1988}:
 
 \begin{equation}
 \label{upper_half_plane}
@@ -179,7 +178,7 @@ As the space is infinite in the x and positive-y directions geodesics appear qui
 
 Figure \ref{fig:half-plane-example} shows an example of the half-plane model in which five geodesics have been plotted. In this example all of the lines on the right are parallel to the leftmost line, additionally the lines on the right also intersect at a single point.
 
-Measuring the distance between points in the half-plane model is more complex than the previous two and is defined as:
+Measuring the distance between points in the half-plane model is more complex than the previous two and is defined as \cite{kubo_geometry_1988}:
 
 \begin{equation}
 \label{half_plane_distance}
@@ -191,7 +190,38 @@ Where the points are given in the form $(x_1, x_2), (y_1, y_2)$, unlike the prev
 An interesting property of the half-plane model is the appearance of circles in the model, they appear as Euclidean circles. Though this may seem strange the appearance of the circle is deceiving as its Hyperbolic centre is not equivalent to its Euclidean centre. A Hyperbolic circle with centre $(x,y)$ and radius $R$ is modelled by a Euclidean circle with centre $(x, y \cosh R)$ and radius $y \sinh R$. This conformance of circles makes the half-plane model a good choice for representations which include Hyperbolic circles, but one must be wary of the distortion of the centre of such circles.
 
 \section{Embedding Methods}
-TODO
+In order to be able to produce a visualisation of Hyperbolic space it is first necessary to determine how the chosen data lies in such a space. This process is known as \textit{embedding} and will be discussed in this section.
+
+\subsection{A Greedy Embedding Method}
+
+Cvetkovski et al. \cite{cvetkovski_hyperbolic_2009} describe a method for embedding dynamic graphs into Hyperbolic space for the purposes of routing. This implementation uses the Poincar\'{e} disc model. Focussing on trees, this method selects a root location in the space at which to place the root node of the tree subject to constraints which cause the node to be placed at an optimal location in the space. The method relies on the network nodes themselves electing a root node and subsequently forming a minimal-depth tree. The nodes accomplish this by each selecting a parent node to be the node that is the closest in hops to the root node. 
+
+After the nodes have identified their parents, the root node is plotted into the space at the chosen location and each node calculates its position in the embedding relative to its parent node. This calculation is performed by initialising two angles for the root node $\alpha_r = \pi$ and $\beta_r = 2\pi$ which correspond to ideal points. A node, $n$, to be placed in the embedding receives angles $\alpha_n = \alpha_p$ and $\beta_n = (\alpha_p + \beta_p) /2$ from its parent, $p$, and determines its own position in the embedding by reflecting the position of it's parent (in this case the root node) in the geodesic $G$ constructed between $\alpha_n$ and $\beta_n$ After sending $\alpha_n$ and $\beta_rn$ to the child the parent node updates the value $\alpha_p := \beta_n$. This method of updating these values ensures there is unlimited space available for the expansion of the tree. This process in then repeated for each node to form a greedy embedding. 
+
+This method of creating an embedding, while offering guaranteed success due to its greedy implementation, has some flaws. The real, physical locations of the nodes are not represented in the embedding, something which is important to the aims of this project. Further, the embedding is designed to be used for a greedy routing algorithm described in the same work, which limits its usefulness when applied to the problem for this project. Indeed, the embedding produces a tree which is not indicative of all links between all nodes and would therefore misrepresent the data. Despite these flaws, the approach of performing an embedding in this way is an interesting application of knowledge and does give some useful insight into the practical uses for such embeddings. 
+
+\subsection{H3: Large Directed Graphs in Hyperbolic Space}
+
+Munzner \cite{munzner_h3_1997} describes a method for laying out large directed graphs in Hyperbolic space. This implementation uses a three dimensional version of the Beltrami-Klein model. The method once again operates on trees but it is possible to display further links between nodes once the model has been plotted. Though a root node must be chosen and a spanning tree constructed, it is possible to use this method to visualise an undirected graph accurately. 
+
+The basis of the method uses \textit{spherical caps} to lay out the nodes in the Hyperbolic space. Each node has a cap with size proportional to the number of nodes descended from it in the tree. This includes all descendant nodes, not just immediate child nodes. These caps represent the area required to embed all descendant nodes of the node to which the cap belongs. As Hyperbolic space expands in all directions, it is possible to fit more caps of equivalent size into the space further down the tree. This allows trees with high branch factor to be embedded into the space easily.
+
+The algorithm to place the caps functions recursively; it first computes the size of the caps required for all leaf nodes, which have a fixed cap size due to having no children, which is the base case for the algorithm. The algorithm then traverses back up the tree and computes the area required for the cap belonging to each node, taking into account the cap size of all child nodes. Finally, the cap size for the root node is calculated, which is the total size of the embedding. Though the size of the caps has been calculated at this point, they have not been laid out in the space, this is the next function of the algorithm, which iterates down the tree from the root node laying out each child cap of each node, until all caps have been placed. This is accomplished through \textit{sphere-packing}, a common mathematical problem outlined by Hales in 1992 \cite{hales_sphere_1992}.
+
+While this method seems more appropriate than the previous one, it does present issues when combined with the aims of this project. Once again, the embedding does not take into account the physical locations of the nodes, indeed the examples supplied in the paper are those without such locations like files in a file system. Though the method could be adapted to take physical location into account, it would be far more appropriate to use a method designed to do this from the beginning. Though it may appear that it is possible to embed a graph using this model the embedding would distort the distances between the nodes even if it was converted to account for physical location. Due to the original embedding being constructed using the tree any links which did not appear in this tree would be vastly distorted, making the embedding misleading. Though the technique of using spherical caps and sphere packing to perform the embedding is efficient, the limitations of this method as a whole decrease its viability for use in this project.
+
+\subsection{A More Mathematical Hyperbolic Embedding Method}
+
+So far, the methods discussed to perform an embedding have been of the practical, algorithmic variety. The method outlined by Wilson et al. \cite{wilson_spherical_2014} is a more mathematical method. This method uses the matrix describing the distances between points in Euclidean space, which should correspond to the distances in Hyperbolic space, to produce a embedding of points in Hyperbolic space.
+
+This method uses the inner product of the points, defined as: 
+
+\begin{equation}
+\label{eq:inner_product_hyperbolic}
+\langle x_i,x_j\rangle = -r^2\cosh \left(\frac{d_{ij}}{r}\right)
+\end{equation}
+
+!!NEED TO CLARIFY THIS FOR REST OF SECTION!!
 
 \section{Haversine Formula}
 When considering the locations of ASes on the Earth's surface a suitable system must be used, the most obvious and simple of which is the latitude longitude geographic co-ordinate system (henceforth known as lat-long). As this system can effectively map any point on the Earth's surface and is well known and understood it is an easy choice to make. However, a key requirement of the chosen system is that it is possible to easily determine distances, something which lat-long fails to provide. It is insufficient to simply treat the lat-long co-ordinates as absolute positions and calculate distance through the difference between the co-ordinates as the earth is not flat. Instead a method known as the Haversine formula must be used.
