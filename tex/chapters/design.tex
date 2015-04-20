@@ -1,12 +1,38 @@
-\chapter{Design and Methodology}
+\chapter{Design}
 \label{cha:Design}
 
 \section{Platform and Programming Language}
 \label{sec:DesignLanguage}
+As this project aims to produce visualisations of the internet embedded in Hyperbolic space it must employ some existing technologies to do so. This section will discuss which technologies will be used and will justify their use. 
+
+The most important technical decision to be made is the choice of programming language as it affects how the project will be designed and limits possible techniques. The following languages will be considered for use in this project:
+
+\begin{itemize}
+	\item{MATLAB}
+	\item{Python}
+	\item{Java}
+\end{itemize}
+
+\subsection{MATLAB}
+MATLAB (\textit{www.mathworks.com}) is a high level mathematical programming language which is provided with an environment. It excels at mathematical programming as it provides many high level functions designed to perform calculations. MATLAB provides matrix and vector support as standard. As this project will require some complex mathematical operations it would seem that MATLAB is the ideal choice, however it does have limitations which affect its viability. 
+
+MATLAB is a commercial product, and is not free, requiring payment in order to use the software. The University of York does provide MATLAB on university owned PC's, however it is currently not possible to install this provided version on a personal PC, where most of the work for this project will be undertaken. Additionally, MATLAB has relatively few third party libraries and if functionality for a specific task does not exist in the language it would most likely be necessary to develop it from scratch. Due to these limitations it would seem that MATLAB is not a suitable candidate for this project.
+
+\subsection{Python}
+Python (\textit{www.python.org}) is a multi-platform programming language which boasts one of the largest sets of third party libraries of any language. This, combined with the speed of its native C implementation makes it an ideal choice for this project. Python comes pre-installed on many operating systems and is available on all popular platforms.
+
+Unlike MATLAB, python does not provide any mathematical matrix or vector support as standard, but does provide array functionality through "lists". Fortunately, as python is so widely used it has many third party libraries which provide mathematical functions, such as NumPy (\textit{www.numpy.org}) and SciPy (\textit{www.scipy.org}). These libraries provide functionality similar to MATLAB while still allowing the flexibility of a general programming language.
+
+\subsection{Java}
+Java (\textit{www.java.com}) is a multi-platform programming language which compiles programs to run on a virtual machine known as the JVM. Java has wide support with many third party libraries and runs on many platforms. As all code is executed on the JVM, programs need only be compiled once and will run on all platforms for which a version of the JVM exists. 
+
+Though Java is natively multi platform, this feature is not actually useful in the scope of this project as it will only be run on a single platform. Additionally, as compiled Java code is interpreted by the JVM and is not native machine code, the general performance of the language falls below native languages.
+
+Due to the limitations of Java and MATLAB this project will be written in python, making use of NumPy, SciPy and any other third party libraries which may be necessary.
 
 \section{Data Sources}
 \label{sec:DesignDataSources}
-As the primary aim of this project is to create and visualise an embedding of the internet it is necessary to collect data describing its structure on which to base the embedding. Using Autonomous Systems as the subject of the mapping serves to make data collection easier, however the following data is required for each system if an embedding is to be created:
+As the primary aim of this project is to create and visualise an embedding of the internet it is necessary to collect data describing its structure, on which to base the embedding. Using Autonomous Systems as the subject of the mapping serves to make data collection easier, however the following data is required for each system if an embedding is to be created:
 
 \begin{itemize}
 	\item{Organisation and ID}

@@ -73,7 +73,7 @@ Upon considering the implications of a geometry in which space expands in all di
 
 One such model of hyperbolic space is the Poincar\'{e} disc model, known henceforth as the \textit{disc model}. If we imagine an attempt to visualise hyperbolic space within euclidean space then we encounter a problem, as we effectively cannot fit the hyperbolic space into the \textit{smaller} Euclidean space. Supposing we wished to visualise the entire, infinite hyperbolic space in a finite subspace of Euclidean space we must compress it. As there is infinite hyperbolic space to compress this visualisation must contain points of infinite compression.
 
-The disc model represents the two-dimensional hyperbolic plane in the Euclidean open unit disc defined as\cite{blair_inversion_2000}:
+The disc model represents the two-dimensional hyperbolic plane in the Euclidean open unit disc defined as \cite{blair_inversion_2000}:
 
 \begin{equation}
 \label{eq:open_unit_disc_eq}
@@ -81,8 +81,11 @@ The disc model represents the two-dimensional hyperbolic plane in the Euclidean 
 \end{equation}
  
 
-In the disc model, an infinite hyperbolic space is compressed into a Euclidean circle with the space becoming more and more compressed as it moves further from the centre of the circle and becoming infinitely compressed at the circle itself. Points which lie on the circle boundary are infinitely far from all other points and are known as \textit{ideal points}.
-This model represents hyperbolic straight lines as curved euclidean lines, unless the line travels directly across the space in which case it appears as a straight euclidean line. Hyperbolic "straight" lines are known as \textit{geodesics}.
+In the disc model, an infinite hyperbolic space is compressed into a Euclidean disc with the space becoming more and more compressed as it moves further from the centre of the disc and becoming infinitely compressed at the boundary of the disc. Points which lie on the disc boundary are infinitely far from all other points and are known as \textit{ideal points}.
+
+In order to understand how models of Hyperbolic space represent "straight" lines it is first necessary to define such a line. Straightness has very little meaning, it is a concept which does not translate well between geometries. One property of any geometry is that it is possible to define distance, the measure of space between two points. In Euclidean geometry it is easy to see that a straight line between two points minimises the distance between them, indeed, a curved line would cover more distance than a straight one. Lines of this type are known as \textit{geodesics} and this definition translates directly into Hyperbolic space. However, the Euclidean representation of a Hyperbolic geodesic may appear to be curved due to the curvature of the space in which it exists. Lines such as this are still "straight" in Hyperbolic space as they must be curved in order to minimise the distance they cover, the definition of a geodesic.
+
+This model represents hyperbolic geodesics as Euclidean arcs, unless the geodesic is a diameter of the disc, in which case it appears as a straight Euclidean line. The Euclidean representation of any geodesic in the disc model must be orthogonal to the disc. Though, strictly speaking, in the Hyperbolic sense the geodesic never intersects the disc, as points on the boundary are infinitely far from all other points.
 
 \begin{figure}
 	\centering
@@ -91,18 +94,21 @@ This model represents hyperbolic straight lines as curved euclidean lines, unles
 	\label{fig:poincare_example}
 \end{figure}
 
-An example of this is shown in figure \ref{fig:poincare_example}. Here, four separate geodesics have been drawn on a hyperbolic plane and then visualised in Euclidean space using the disc model. Though these lines do not appear straight in Euclidean space the negative curvature of the hyperbolic space causes their apparent curvature in this model. Measuring an angle in this model yields the actual hyperbolic angle thus making the model conformal. Angles are determined by simply measuring the angle between the tangents of the Euclidean representation of the curves at the point they intersect.
+An example of this is shown in figure \ref{fig:poincare_example}. Here, four separate geodesics have been drawn on a hyperbolic plane and then visualised in Euclidean space using the disc model. Though these lines do not appear straight in Euclidean space the negative curvature of the hyperbolic space causes their apparent curvature in this model. Any geodesics which do not intersect inside the disc are considered parallel.
+
+Measuring a Euclidean angle in this model yields the actual Hyperbolic angle thus making the model conformal. Angles are determined by simply measuring the angle between the tangents of the Euclidean representation of the curves at the point of intersection. This property of the model makes it extremely useful for visualisations where angles are important.
 
 Calculating Hyperbolic distance in the disc model is more complex than simply measuring distances in the Euclidean representation. Hyperbolic distance in the disc model, between the Euclidean points A and B, is defined as \cite{blair_inversion_2000}:
 
 \begin{equation}
 \label{distance_disc_model}
-\ln(AB,PQ)
+\log(AB,PQ)
 \end{equation}
 
 where P and Q are the ideal points of the geodesic that bisects A and B. These points must be in the order P, B, A, Q on the line. (AB, PQ) is the \textit{cross-ratio} of the four points and is defined as \cite{blair_inversion_2000}:
 
 \begin{equation}
+\label{cross_ratio}
 (AB,PQ) = \frac{|AP|\cdot|BQ|}{|BP|\cdot|AQ|}
 \end{equation}
 
@@ -112,14 +118,18 @@ The further an object is from the centre of the space the more compressed it's E
 
 \subsection{The Beltrami-Klein Model}
 
-The Beltrami-Klein model of hyperbolic geometry, known henceforth as the \textit{projective model} addresses the issue of the distortion of the straightness of lines but introduces a distortion of angle.
+The Beltrami-Klein model of hyperbolic geometry, known henceforth as the \textit{projective model} addresses the issue of the distortion of the "straightness" of lines but introduces a distortion of angle.
 
-The projective model is again defined in two-dimensional Euclidean space as the open unit disc, given earlier in equation \ref{eq:open_unit_disc_eq}. A geodesic, in the projective model is any chord of the unit disc. Indeed, for a geodesic in the disc model which has ideal points A and B it is trivial to determine the equivalent in the projective model, it is simply the chord AB. The method for calculating distance is also the same as the disc model, and is defined in equation \ref{distance_disc_model}.
+The projective model is again defined in two-dimensional Euclidean space as the open unit disc, given earlier in equation \ref{eq:open_unit_disc_eq}. A geodesic, in the projective model is any chord of the unit disc. Indeed, for a geodesic in the disc model which has ideal points A and B it is trivial to determine the equivalent in the projective model, it is simply the chord AB.
 
+The method for calculating distance in the projective model differs slightly from the disc model and the distance between points A and B is defined as:
 
-Figure \ref{fig:klein_example} provides an example of the model containing three geodesics. In this diagram the two topmost lines are parallel to the bottommost line and both pass through the same point, an important property of hyperbolic space. As the Hyperbolic space is effectively bent in the visualisation, Euclidean angles in this model do not correspond to the same Hyperbolic angles and this must be accounted for if the correct modelling of angles is important, as such the model is not conformal. Of course, if it is not important for angles to be accurate in the visualisation then this model may be ideal.
+\begin{equation}
+\label{distance_disc_model}
+\frac{1}{2}\log(AB,PQ)
+\end{equation}
 
-In order to calculate the angle between two geodesics in the projective model... TODO
+Where P and Q are again the ideal endpoints of the geodesic that intersects A and B and all four points are defined on the line in the order P, B, A, Q. (AB, PQ) is the cross-ratio of the four points as defined in equation \ref{cross_ratio}.
 
 \begin{figure}
 	\centering
@@ -128,16 +138,38 @@ In order to calculate the angle between two geodesics in the projective model...
 	\label{fig:klein_example}
 \end{figure}
 
+Figure \ref{fig:klein_example} provides an example of the model containing three geodesics. If two geodesics do not intersect within the  In this diagram the two topmost lines are parallel to the bottommost line and both pass through the same point, an important property of hyperbolic space. As the Hyperbolic space is effectively bent in the visualisation, Euclidean angles in this model do not correspond to the same Hyperbolic angles and this must be accounted for if the correct modelling of angles is important, as such the model is not conformal. Of course, if it is unimportant for angles to be accurate in the visualisation then this model may be ideal.
+
+As the model is not conformal, it is difficult to measure Hyperbolic angles given only the Euclidean representation of the model. Instead of attempting to measure angles directly, it is far more simple to convert to a conformal model and measure Euclidean angles directly. Fortunately, a simple conversion exists from the projective model to the disc model:
+
+\begin{equation}
+\label{distance_disc_model}
+u=\frac{(1-\sqrt{1-s\cdot{}s})s}{s\cdot{}s}
+\end{equation}
+
+Where $s$ is a vector representing a point in the projective model and $u$ is its equivalent in the disc model. A similar conversion exists in the opposite direction and is given by:
+
+\begin{equation}
+\label{distance_disc_model}
+s=\frac{2u}{1+u\cdot{}u}
+\end{equation}
+
+As the models are related by these simple equations conversion between them is trivial. Of course, any geodesic can be easily converted between the models by using its ideal points, simplifying conversion between the two models further.
+
+It is important to note that both the disc and projective models map Hyperbolic space to Euclidean space in such a way that changing the position of the centre of the visualisation will alter the Euclidean size of objects shown. This property effectively allows for a focus on a specific object, which will appear in the centre of the visualisation at its actual Hyperbolic size but also gives a view of the entire space with objects being scaled down in size more the further they are from the centre. This property of these visualisations is extremely useful for displaying trees which have high branch factors, a property that is exhibited by graph representations of the internet.
+
 \subsection{The Poincar\'{e} Half-Plane Model}
 
-Both models discussed previously represent the infinite hyperbolic plane inside a finite Euclidean circle, the Poincar\'{e} half-plane model, known henceforth as the \textit{half-plane} model, does not. Instead, the infinite hyperbolic space is plotted in the upper-half plane. This is a complex plane which consists of all complex numbers with a positive imaginary part. 
+Both models discussed previously represent the infinite hyperbolic plane inside a finite Euclidean circle, the Poincar\'{e} half-plane model, known henceforth as the \textit{half-plane} model, does not. Instead, the infinite hyperbolic space is plotted in the upper-half plane, defined as:
 
-DEFINE UPPER HALF PLANE!!!
+\begin{equation}
+\label{upper_half_plane}
+\{(x,y):y>0\}
+\end{equation}
 
-Figure \ref{fig:half-plane-example} shows an example of the half-plane model in which five geodesics have been plotted. In this example all of the lines on the right are parallel to the leftmost line, additionally the lines on the right also pass through a single point. The half plane model is conformal, as Euclidean angles measured in the model correspond to actual hyperbolic angles.
+Unlike the previous two models, the half-plane model is unbounded in the x direction, providing infinite space in which to visualise Hyperbolic space. However, a bounding still exists in the y direction, which, like previous models, compresses the space infinitely at the bound. Ideal points lie on the line $y=0$ which are again infinitely far from all other points.
 
-DISTANCES AND ANGLES!!!
-
+As the space is infinite in the x and positive-y directions geodesics appear quite differently to the disc and projective models. A geodesic in the half-plane model appears as either a Euclidean circular arc perpendicular to the x-axis or as a straight line perpendicular to the x-axis. Lines are parallel if they do not intersect in the plane.
 \begin{figure}
 	\centering
 	\includegraphics[width=0.75\textwidth]{upper-half-plane.png}
@@ -145,5 +177,32 @@ DISTANCES AND ANGLES!!!
 	\label{fig:half-plane-example}
 \end{figure}
 
+Figure \ref{fig:half-plane-example} shows an example of the half-plane model in which five geodesics have been plotted. In this example all of the lines on the right are parallel to the leftmost line, additionally the lines on the right also intersect at a single point.
+
+Measuring the distance between points in the half-plane model is more complex than the previous two and is defined as:
+
+\begin{equation}
+\label{half_plane_distance}
+arcosh\left(1+\frac{(x_2-x_1)^2+(y_2-y_1)^2}{2y_1y_2}\right)
+\end{equation}
+
+Where the points are given in the form $(x_1, x_2), (y_1, y_2)$, unlike the previous models which use pure vector mathematics. Measuring angles is simple, however, as the model is conformal, simply measuring the Euclidean angle between the tangents of the lines at the point of intersection yields the Hyperbolic angle.
+
+An interesting property of the half-plane model is the appearance of circles in the model, they appear as Euclidean circles. Though this may seem strange the appearance of the circle is deceiving as its Hyperbolic centre is not equivalent to its Euclidean centre. A Hyperbolic circle with centre $(x,y)$ and radius $R$ is modelled by a Euclidean circle with centre $(x, y \cosh R)$ and radius $y \sinh R$. This conformance of circles makes the half-plane model a good choice for representations which include Hyperbolic circles, but one must be wary of the distortion of the centre of such circles.
+
 \section{Embedding Methods}
+TODO
+
 \section{Haversine Formula}
+When considering the locations of ASes on the Earth's surface a suitable system must be used, the most obvious and simple of which is the latitude longitude geographic co-ordinate system (henceforth known as lat-long). As this system can effectively map any point on the Earth's surface and is well known and understood it is an easy choice to make. However, a key requirement of the chosen system is that it is possible to easily determine distances, something which lat-long fails to provide. It is insufficient to simply treat the lat-long co-ordinates as absolute positions and calculate distance through the difference between the co-ordinates as the earth is not flat. Instead a method known as the Haversine formula must be used.
+
+The Haversine formula calculates the distance between two points on the surface of a sphere and is defined as \cite{chopde_landmark_2013}:
+
+\begin{equation}
+\label{haversine_formula}
+2r\sin^-1\left(\sqrt{\sin^2\left(\frac{\phi_2 - \phi_1}{2}\right) + \cos(\phi_1) \cos(\phi_2) \sin^2\left(\frac{\psi_2 - \psi_1}{2}\right)}\right)
+\end{equation}
+
+where a pair of points are given with latitude and longitude $(\phi,\psi)$ and $r$ is the radius of the Earth. 
+
+Though the computed distance may not be exact due to the Earth not being a uniform sphere, it is satisfactory for the purposes of this project.
