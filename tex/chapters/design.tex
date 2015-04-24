@@ -1,4 +1,4 @@
-\chapter{Design}
+\chapter{Design and Implementation}
 \label{cha:Design}
 
 \section{Platform and Programming Language}
@@ -65,7 +65,7 @@ Once this list of IP addresses is obtained it is then possible to determine the 
 
 \section{Further Data Considerations}
 
-This section aims to outline any further considerations which were raised during development of this project.
+This section aims to outline any further data considerations which were raised during development of this project.
 
 \subsection{Dataset Size}
 
@@ -83,3 +83,43 @@ Having exhausted all other lines of enquiry it is necessary to consider using a 
 While the chosen data sources contain relatively complete data for most ASes it is impossible to have full coverage. Of particular note is the unavailability of an IP address for some ASes. This is due to these systems having no IP address ranges which route to them, which is fairly common. Unfortunately, if it is not possible to determine a valid IP address for an AS it is not possible to determine its location. If an AS has no known location it cannot be part of the embedding as its distance from other ASes cannot be calculated. 
 
 For this reason, it is necessary to validate the dataset before it is processed by removing any AS for which there is incomplete data. While this may seem an extreme measure there is no alternative as any ASes which have missing data are useless in this context. Further, performing this validation before the data subset is generated means that any ASes which are eliminated cannot be followed by the recursive algorithm. This effectively prevents any ASes which may have been orphaned from being included in the embedding, which prevents misleading information from being shown in the visualisations. 
+
+\subsection{Organisation of Data}
+As each AS has a large amount of associated data, it will be necessary to produce a method of organising this data so that it can be used effectively. It may be possible to simply encode the data for each AS into a list, and implement a rule for extracting data from these lists. For example, the ASN is at index $0$ and the name at index $1$. Unfortunately, this solution does not scale well when each object contains numerous data. Further, ASes are identified by their ASN and python lists by an index beginning at zero, these two indexing systems are not compatible as gaps exist in the allocation of ASNs. 
+
+It seems that there are two separate problems here which must be solved in conjunction. Firstly, the issue of storing the data for each AS; a sensible way to solve this would be to define a custom python class which holds all of the data for a single AS. It is then possible to easily extract a specific piece of AS data from an AS for which the class object is known. 
+
+The second problem, regarding the indexing of ASes is also simple to solve. Python has a built in dictionary structure \textit{dict} which allows for the referencing of its contents through a hashable key. Storing each AS class object in a dict with the ASN as the key would allow any AS to be located and any piece of data for that AS to be extracted. It is important to note that the ASN is being stored as a string in this instance, as it has no numerical meaning and arithmetic should not be performed on it. 
+
+Though most of the data associated with an AS is singular, the location or name for example, there is a special case in the connections between ASes. As the network of ASes can be represented as a graph this structure must be described by the stored data. A simple way to achieve this is to store a list of the ASN for all ASes connected to an AS. This method provides a way to retrieve all connections to an AS easily, by simply extracting the list and a way of following these connections through the main AS dict, using the ASNs. If, however any more information was to be stored about a particular AS to AS relationship, such as whether that link is peer-peer or provider-customer, then a new \textit{peering} class can be created which facilitates the storage of such data. 
+
+
+\section{Performing The Embedding}
+
+The method discussed previously in section \ref{sec:hyperbolic_embedding} will be used to perform the embedding for this project. This method requires a distance matrix to operate upon which can be obtained from the AS location data using the Haversine formula (discussed in section \ref{sec:haversine}). The method itself could be implemented in python, however an implementation already exists in MATLAB, which is the better choice as this implementation has been proven to work, and allows more development time for other parts of the project. 
+
+\subsection{MATLAB in Python}
+
+As this implementation is not native python and cannot be run as such, there are two choices for how to proceed. The simplest choice, though it is inelegant, is to export the distance matrix from python, import it into MATLAB, run the embedding procedure manually and transfer the results back. While it is simple, this method is extremely time consuming, as the manual transfer and execution significantly slows down runs of the overall application. Additionally, as this method is not automated it is possible that mistakes will be made when copying the data back and forth. 
+
+Instead of manually transferring the data back and forth, it could be transferred automatically, by python, when the embedding procedure is required to be run. This solution eliminates the introduction of random error at the point of copying and decreases the running time of the application. Unfortunately, this method still requires the MATLAB embedding code to be invoked manually. There is, however, a third way. If it were possible to execute a MATLAB instance from inside python, and transfer data in and out of this instance then the entire solution could be completely automated.
+Fortunately, a python library exists to solve this problem. A project named \textit{matlab\_wrapper} (\textit{github.com/mrkrd/matlab\_wrapper}) allows for the invoking of a MATLAB session from within python with functions to import and export data and execute arbitrary MATLAB code. With this library the entire embedding process can be automated, significantly speeding up the time required to produce visualisations. 
+
+\subsection{Calculation of Embedding Points}
+
+Though it is now possible to execute the code for the embedding, this does not produce the final embedding co-ordinates, only the inner product matrix, $\boldsymbol{Z}$, of the points. The steps to perform this conversion are discussed mathematically in section \ref{sec:hyperbolic_embedding} and will be discussed in terms of implementation here. 
+
+The equation that must be implemented is:
+\begin{equation}
+\label{eq:embedding_x_impl}
+\boldsymbol{X}=r\boldsymbol{U}_Z\boldsymbol{\Lambda}_{z||}^{\frac{1}{2}}
+\end{equation}
+
+where $r$ is the radius of the space, and $\boldsymbol{U}$ and $\boldsymbol{\Lambda}$ are the eigenvectors and eigenvalues of $\boldsymbol{Z}$ respectively. In order to implement this, the eigenvalues and eigenvectors of $\boldsymbol{Z}$ must be calculated. The linear algebra package of SciPy provides functionality to do this, and, as $\boldsymbol{Z}$ is symmetric (due to the inner product being commutative) it is possible to use the efficient \textit{eigh()} function designed for Hermitian or symmetric matrices. As an interesting side node, the standard \textit{eig()} function will not detect if a matrix is Hermitian or symmetric and will return complex values in any case. 
+
+Having calculated the eigenvectors and eigenvalues of $\boldsymbol{Z}$ it is possible to calculate the value of $\boldsymbol{X}$ directly using equation \ref{eq:embedding_x_impl}. As the matrix values in this equation will be stored in NumPy arrays the implementation is simple, and the standard python multiplication function suffices. However, the standard python $\textit{sqrt()}$ does not support NumPy arrays and the NumPy equivalent must be used. As the magnitude of the eigenvalue matrix is required the NumPy \textit{absolute()} function must be used to prevent complex numbers being returned by \textit{sqrt()}.
+
+Though $\boldsymbol{X}$ is able to be calculated, this does not yield the co-ordinates straight away. A further step is required in order to extract the correct dimensions. The eigenvalues of $\boldsymbol{Z}$ each correspond to a column in $\boldsymbol{X}$, this allows for the determination of the correct dimension columns as there will be a single large negative eigenvalue (the negative dimension of the space) and $N$ large positive eigenvalues (the positive dimensions of the space). All other eigenvalues should be have small magnitude compared to these. Finding the correct indexes for the dimensions is simple, the eigenvalue array must be sorted in ascending order. The eigenvalue, $\lambda^-$ for the negative dimension will then be at index 0 in the sorted array. The correct column in $\boldsymbol{X}$ can then be determined by finding the index of $\lambda^-$ in the eigenvalue matrix of $\boldsymbol{Z}$. The $N$ positive dimensions can be located in a similar fashion, though these will be located at index $-N$ for $N=1,...,n$, in the sorted eigenvalue array. It is then trivial to extract the correct columns from $\boldsymbol{X}$ and create co-ordinate tuples for each point in the embedding. 
+
+
+

@@ -210,7 +210,8 @@ The algorithm to place the caps functions recursively; it first computes the siz
 
 While this method seems more appropriate than the previous one, it does present issues when combined with the aims of this project. Once again, the embedding does not take into account the physical locations of the nodes, indeed the examples supplied in the paper are those without such locations like files in a file system. Though the method could be adapted to take physical location into account, it would be far more appropriate to use a method designed to do this from the beginning. Though it may appear that it is possible to embed a graph using this model the embedding would distort the distances between the nodes even if it was converted to account for physical location. Due to the original embedding being constructed using the tree any links which did not appear in this tree would be vastly distorted, making the embedding misleading. Though the technique of using spherical caps and sphere packing to perform the embedding is efficient, the limitations of this method as a whole decrease its viability for use in this project.
 
-\subsection{A More Mathematical Hyperbolic Embedding Method}
+\subsection{A More Mathematical Embedding Method}
+\label{sec:hyperbolic_embedding}
 
 So far, the methods discussed to perform an embedding have been of the practical, algorithmic variety. The method outlined by Wilson et al. \cite{wilson_spherical_2014} is a more mathematical method. This method uses the matrix describing the distances between points in Euclidean space, which should correspond to the distances in Hyperbolic space, to produce a embedding of points in Hyperbolic space.
 
@@ -240,6 +241,7 @@ The result of this equation is an $NxN$ matrix for which each row is a point and
 This method is vastly superior to those previously discussed, its primary advantage arises from the strategy of embedding using pre-existing geometric data. In the case of this project, this allows the embedding to use location data gathered for ASes without having to adapt the embedding method. Further, this method is already generalised to any number of dimensions, meaning it is possible to produce both two and three dimensional representations of the data. 
 
 \section{Haversine Formula}
+\label{sec:haversine}
 When considering the locations of ASes on the Earth's surface a suitable system must be used, the most obvious and simple of which is the latitude longitude geographic co-ordinate system (henceforth known as lat-long). As this system can effectively map any point on the Earth's surface and is well known and understood it is an easy choice to make. However, a key requirement of the chosen system is that it is possible to easily determine distances, something which lat-long fails to provide. It is insufficient to simply treat the lat-long co-ordinates as absolute positions and calculate distance through the difference between the co-ordinates as the earth is not flat. Instead a method known as the Haversine formula must be used.
 
 The Haversine formula calculates the distance between two points on the surface of a sphere and is defined as \cite{chopde_landmark_2013}:
