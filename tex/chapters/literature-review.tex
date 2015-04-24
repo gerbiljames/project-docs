@@ -214,14 +214,30 @@ While this method seems more appropriate than the previous one, it does present 
 
 So far, the methods discussed to perform an embedding have been of the practical, algorithmic variety. The method outlined by Wilson et al. \cite{wilson_spherical_2014} is a more mathematical method. This method uses the matrix describing the distances between points in Euclidean space, which should correspond to the distances in Hyperbolic space, to produce a embedding of points in Hyperbolic space.
 
-This method uses the inner product of the points, defined as: 
+This method uses the inner product of the points, defined for Hyperbolic space as: 
 
 \begin{equation}
 \label{eq:inner_product_hyperbolic}
 \langle x_i,x_j\rangle = -r^2\cosh \left(\frac{d_{ij}}{r}\right)
 \end{equation}
 
-!!NEED TO CLARIFY THIS FOR REST OF SECTION!!
+where $r$ is the radius of the embedding space and $d_{ij}$ is the distance between a pair of points $i$ and $j$. It is possible to calculate $\boldsymbol{Z}$, the inner product of the points, directly from this equation, but this is not possible immediately as the radius, $r$, is unknown. As $\boldsymbol{Z}$ is an inner product matrix of points in Hyperbolic space it should have exactly one negative eigenvalue and one zero eigenvalue. This is due to hyperbolic space having a single negative dimension. Knowing this, it is possible to minimise the magnitude of the second smallest eigenvalue to find $r$ by:
+
+\begin{equation}
+\label{eq:argmin_hyperbolic}
+r^*=\underset{r}{\arg\min}|\lambda_2[\boldsymbol{Z}(r)]|
+\end{equation}
+
+where $\lambda_2$ is the value of the second smallest eigenvalue of $\boldsymbol{Z}$. Having approximated $r$ it is then possible to calculate $\boldsymbol{Z}$ using equation \ref{eq:inner_product_hyperbolic}, this then allows for the calculation of $\boldsymbol{X}$, the point matrix for a Euclidean embedding of the space, through eigendecomposition of $\boldsymbol{Z}$ to obtain a matrix of its eigenvalues, $\boldsymbol{\Lambda}$ and a matrix of its eigenvectors $\boldsymbol{U}$. It is then possible to calculate $\boldsymbol{X}$ by:
+
+\begin{equation}
+\label{eq:embedding_x}
+\boldsymbol{X}=\boldsymbol{U}_Z\boldsymbol{\Lambda}_{z||}^{\frac{1}{2}}
+\end{equation}
+
+The result of this equation is an $NxN$ matrix for which each row is a point and each column represents a dimension of the embedding. As with a standard embedding, it is possible to drop any dimensions which have negative eigenvalues, yielding a co-ordinate matrix that specifies the Hyperbolic co-ordinates of the points.
+
+This method is vastly superior to those previously discussed, its primary advantage arises from the strategy of embedding using pre-existing geometric data. In the case of this project, this allows the embedding to use location data gathered for ASes without having to adapt the embedding method. Further, this method is already generalised to any number of dimensions, meaning it is possible to produce both two and three dimensional representations of the data. 
 
 \section{Haversine Formula}
 When considering the locations of ASes on the Earth's surface a suitable system must be used, the most obvious and simple of which is the latitude longitude geographic co-ordinate system (henceforth known as lat-long). As this system can effectively map any point on the Earth's surface and is well known and understood it is an easy choice to make. However, a key requirement of the chosen system is that it is possible to easily determine distances, something which lat-long fails to provide. It is insufficient to simply treat the lat-long co-ordinates as absolute positions and calculate distance through the difference between the co-ordinates as the earth is not flat. Instead a method known as the Haversine formula must be used.
