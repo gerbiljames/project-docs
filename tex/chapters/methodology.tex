@@ -1,0 +1,31 @@
+\chapter{Methodology}
+
+As this project aims to produce some software a discussion of the methods that will be used to produce this software is necessary. This section aims to outline the methods that will be used when writing software for this project.
+
+\section{Development Method}
+Writing software is a complex process which cannot be accomplished by just writing code. Instead, there are frameworks which provide a set of rules which aim to streamline development. 
+
+\subsection{Waterfall Model}
+One such methodology is known as the \textit{waterfall model} \cite{royce_managing_1970} and describes an iterative method for developing software. The main approach for this model is to perform the following in order:
+
+\begin{enumerate}
+	\item{Requirements}
+	\item{Design}
+	\item{Implementation}
+	\item{Verification}
+	\item{Maintenance}
+\end{enumerate}
+
+In terms of this project, several of these do not apply. Requirements are not required as the software is not a deliverable, indeed, there is no customer to propose requirements or to verify they have been met. The \textit{requirements} of this project are effectively implicit in the aims, described in section \ref{sec:aims}. Again, as no product is being delivered to a customer the maintenance step is not required. 
+
+The iterative process described by this model does not necessarily work well when applied to this project. As the steps must be completed in order the system design must be completed before any work on the implementation can begin. If any issues arise in the implementation stage then the design stage must be revisited, slowing development. Indeed, the same applies to the verification stage, if any issues arise in testing then either the implementation or both the design and implementation must be modified. The waterfall model is much more suited to large software projects which must be delivered to customers.
+
+\subsection{Agile Development}
+
+Agile development \cite{agile_manifesto} is a set of software development methods which aim to provide adaptive planning and a rapid response to change. Agile development does not provide a rigid framework to follow when undertaking development, instead it operates through the use of principles which guide development appropriately. 
+
+A key principle of agile development is that the processes used must be robust to changing requirements, if issues are detected at any stage of development then they must be handled within that stage. It is pointless modifying the design when a small bug is encountered during implementation, and agile protects from this. Using agile development for this project allows for easy adaptation if such problems occur. 
+
+As the program produced for this project is not part of the deliverables there is no need to produce documentation for it. Agile development supports this decision, as it mandates that concrete design decisions should not be made before it is understood how they can be implemented. For this reason, the design and implementation of this project will be performed in parallel. This allows any changes in design to influence implementation quickly. Software produced can also be tested as it is implemented, another philosophy of agile development.
+
+Overall, agile development would appear to be a good choice for use in this project, due to its synergy with the project aims and its simplistic development model.
