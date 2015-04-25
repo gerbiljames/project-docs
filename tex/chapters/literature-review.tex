@@ -69,6 +69,7 @@ Another interesting property of modifying the fifth postulate is the difference 
 Upon considering the implications of a geometry in which space expands in all directions, a problem arises: how can this be modelled in a space which does not exhibit the same expanding property? Unfortunately, in order to do so, it is necessary to appear to distort some properties of the space.
 
 \subsection{The Poincar\'{e} Disc Model}
+\label{sec:discmodel}
 
 One such model of hyperbolic space is the Poincar\'{e} disc model, known henceforth as the \textit{disc model}. If we imagine an attempt to visualise hyperbolic space within euclidean space then we encounter a problem, as we effectively cannot fit the hyperbolic space into the \textit{smaller} Euclidean space. Supposing we wished to visualise the entire, infinite hyperbolic space in a finite subspace of Euclidean space we must compress it. As there is infinite hyperbolic space to compress this visualisation must contain points of infinite compression.
 
@@ -82,9 +83,9 @@ The disc model represents the two-dimensional hyperbolic plane in the Euclidean 
 
 In the disc model, an infinite hyperbolic space is compressed into a Euclidean disc with the space becoming more and more compressed as it moves further from the centre of the disc and becoming infinitely compressed at the boundary of the disc. Points which lie on the disc boundary are infinitely far from all other points and are known as \textit{ideal points}.
 
-In order to understand how models of Hyperbolic space represent "straight" lines it is first necessary to define such a line. Straightness has very little meaning, it is a concept which does not translate well between geometries. One property of any geometry is that it is possible to define distance, the measure of space between two points. In Euclidean geometry it is easy to see that a straight line between two points minimises the distance between them, indeed, a curved line would cover more distance than a straight one. Lines of this type are known as \textit{geodesics} and this definition translates directly into Hyperbolic space. However, the Euclidean representation of a Hyperbolic geodesic may appear to be curved due to the curvature of the space in which it exists. Lines such as this are still "straight" in Hyperbolic space as they must be curved in order to minimise the distance they cover, the definition of a geodesic.
+In order to understand how models of hyperbolic space represent "straight" lines it is first necessary to define such a line. Straightness has very little meaning, it is a concept which does not translate well between geometries. One property of any geometry is that it is possible to define distance, the measure of space between two points. In Euclidean geometry it is easy to see that a straight line between two points minimises the distance between them, indeed, a curved line would cover more distance than a straight one. Lines of this type are known as \textit{geodesics} and this definition translates directly into hyperbolic space. However, the Euclidean representation of a hyperbolic geodesic may appear to be curved due to the curvature of the space in which it exists. Lines such as this are still "straight" in hyperbolic space as they must be curved in order to minimise the distance they cover, the definition of a geodesic.
 
-This model represents hyperbolic geodesics as Euclidean arcs, unless the geodesic is a diameter of the disc, in which case it appears as a straight Euclidean line. The Euclidean representation of any geodesic in the disc model must be orthogonal to the disc. Though, strictly speaking, in the Hyperbolic sense the geodesic never intersects the disc, as points on the boundary are infinitely far from all other points.
+This model represents hyperbolic geodesics as Euclidean arcs, unless the geodesic is a diameter of the disc, in which case it appears as a straight Euclidean line. The Euclidean representation of any geodesic in the disc model must be orthogonal to the disc. Though, strictly speaking, in the hyperbolic sense the geodesic never intersects the disc, as points on the boundary are infinitely far from all other points.
 
 \begin{figure}
 	\centering
@@ -95,9 +96,9 @@ This model represents hyperbolic geodesics as Euclidean arcs, unless the geodesi
 
 An example of this is shown in figure \ref{fig:poincare_example}. Here, four separate geodesics have been drawn on a hyperbolic plane and then visualised in Euclidean space using the disc model. Though these lines do not appear straight in Euclidean space the negative curvature of the hyperbolic space causes their apparent curvature in this model. Any geodesics which do not intersect inside the disc are considered parallel.
 
-Measuring a Euclidean angle in this model yields the actual Hyperbolic angle thus making the model conformal. Angles are determined by simply measuring the angle between the tangents of the Euclidean representation of the curves at the point of intersection. This property of the model makes it extremely useful for visualisations where angles are important.
+Measuring a Euclidean angle in this model yields the actual hyperbolic angle thus making the model conformal. Angles are determined by simply measuring the angle between the tangents of the Euclidean representation of the curves at the point of intersection. This property of the model makes it extremely useful for visualisations where angles are important.
 
-Calculating Hyperbolic distance in the disc model is more complex than simply measuring distances in the Euclidean representation. Hyperbolic distance in the disc model, between the Euclidean points A and B, is defined as \cite{blair_inversion_2000}:
+Calculating hyperbolic distance in the disc model is more complex than simply measuring distances in the Euclidean representation. hyperbolic distance in the disc model, between the Euclidean points A and B, is defined as \cite{blair_inversion_2000}:
 
 \begin{equation}
 \label{distance_disc_model}
@@ -111,9 +112,9 @@ where P and Q are the ideal points of the geodesic that bisects A and B. These p
 (AB,PQ) = \frac{|AP|\cdot|BQ|}{|BP|\cdot|AQ|}
 \end{equation}
 
-where |PQ|, for example, is the Euclidean arc length between the points P and Q on the Euclidean representation of the Hyperbolic line which intersects A and B.
+where |PQ|, for example, is the Euclidean arc length between the points P and Q on the Euclidean representation of the hyperbolic line which intersects A and B.
 
-The further an object is from the centre of the space the more compressed it's Euclidean representation becomes, making it appear smaller. Objects near the centre of the space are represented more accurately as the compression of the Hyperbolic space is low there.
+The further an object is from the centre of the space the more compressed it's Euclidean representation becomes, making it appear smaller. Objects near the centre of the space are represented more accurately as the compression of the hyperbolic space is low there.
 
 \subsection{The Beltrami-Klein Model}
 
@@ -137,9 +138,9 @@ Where P and Q are again the ideal endpoints of the geodesic that intersects A an
 	\label{fig:klein_example}
 \end{figure}
 
-Figure \ref{fig:klein_example} provides an example of the model containing three geodesics. If two geodesics do not intersect within the  In this diagram the two topmost lines are parallel to the bottommost line and both pass through the same point, an important property of hyperbolic space. As the Hyperbolic space is effectively bent in the visualisation, Euclidean angles in this model do not correspond to the same Hyperbolic angles and this must be accounted for if the correct modelling of angles is important, as such the model is not conformal. Of course, if it is unimportant for angles to be accurate in the visualisation then this model may be ideal.
+Figure \ref{fig:klein_example} provides an example of the model containing three geodesics. If two geodesics do not intersect within the  In this diagram the two topmost lines are parallel to the bottommost line and both pass through the same point, an important property of hyperbolic space. As the hyperbolic space is effectively bent in the visualisation, Euclidean angles in this model do not correspond to the same hyperbolic angles and this must be accounted for if the correct modelling of angles is important, as such the model is not conformal. Of course, if it is unimportant for angles to be accurate in the visualisation then this model may be ideal.
 
-As the model is not conformal, it is difficult to measure Hyperbolic angles given only the Euclidean representation of the model. Instead of attempting to measure angles directly, it is far more simple to convert to a conformal model and measure Euclidean angles directly. Fortunately, a simple conversion exists from the projective model to the disc model:
+As the model is not conformal, it is difficult to measure hyperbolic angles given only the Euclidean representation of the model. Instead of attempting to measure angles directly, it is far more simple to convert to a conformal model and measure Euclidean angles directly. Fortunately, a simple conversion exists from the projective model to the disc model:
 
 \begin{equation}
 \label{projective_to_disc}
@@ -155,7 +156,7 @@ s=\frac{2u}{1+u\cdot{}u}
 
 As the models are related by these simple equations conversion between them is trivial. Of course, any geodesic can be easily converted between the models by using its ideal points, simplifying conversion between the two models further.
 
-It is important to note that both the disc and projective models map Hyperbolic space to Euclidean space in such a way that changing the position of the centre of the visualisation will alter the Euclidean size of objects shown. This property effectively allows for a focus on a specific object, which will appear in the centre of the visualisation at its actual Hyperbolic size but also gives a view of the entire space with objects being scaled down in size more the further they are from the centre. This property of these visualisations is extremely useful for displaying trees which have high branch factors, a property that is exhibited by graph representations of the internet.
+It is important to note that both the disc and projective models map hyperbolic space to Euclidean space in such a way that changing the position of the centre of the visualisation will alter the Euclidean size of objects shown. This property effectively allows for a focus on a specific object, which will appear in the centre of the visualisation at its actual hyperbolic size but also gives a view of the entire space with objects being scaled down in size more the further they are from the centre. This property of these visualisations is extremely useful for displaying trees which have high branch factors, a property that is exhibited by graph representations of the internet.
 
 \subsection{The Poincar\'{e} Half-Plane Model}
 
@@ -166,7 +167,7 @@ Both models discussed previously represent the infinite hyperbolic plane inside 
 \{(x,y):y>0\}
 \end{equation}
 
-Unlike the previous two models, the half-plane model is unbounded in the x direction, providing infinite space in which to visualise Hyperbolic space. However, a bounding still exists in the y direction, which, like previous models, compresses the space infinitely at the bound. Ideal points lie on the line $y=0$ which are again infinitely far from all other points.
+Unlike the previous two models, the half-plane model is unbounded in the x direction, providing infinite space in which to visualise hyperbolic space. However, a bounding still exists in the y direction, which, like previous models, compresses the space infinitely at the bound. Ideal points lie on the line $y=0$ which are again infinitely far from all other points.
 
 As the space is infinite in the x and positive-y directions geodesics appear quite differently to the disc and projective models. A geodesic in the half-plane model appears as either a Euclidean circular arc perpendicular to the x-axis or as a straight line perpendicular to the x-axis. Lines are parallel if they do not intersect in the plane.
 \begin{figure}
@@ -185,16 +186,16 @@ Measuring the distance between points in the half-plane model is more complex th
 arcosh\left(1+\frac{(x_2-x_1)^2+(y_2-y_1)^2}{2y_1y_2}\right)
 \end{equation}
 
-Where the points are given in the form $(x_1, x_2), (y_1, y_2)$, unlike the previous models which use pure vector mathematics. Measuring angles is simple, however, as the model is conformal, simply measuring the Euclidean angle between the tangents of the lines at the point of intersection yields the Hyperbolic angle.
+Where the points are given in the form $(x_1, x_2), (y_1, y_2)$, unlike the previous models which use pure vector mathematics. Measuring angles is simple, however, as the model is conformal, simply measuring the Euclidean angle between the tangents of the lines at the point of intersection yields the hyperbolic angle.
 
-An interesting property of the half-plane model is the appearance of circles in the model, they appear as Euclidean circles. Though this may seem strange the appearance of the circle is deceiving as its Hyperbolic centre is not equivalent to its Euclidean centre. A Hyperbolic circle with centre $(x,y)$ and radius $R$ is modelled by a Euclidean circle with centre $(x, y \cosh R)$ and radius $y \sinh R$. This conformance of circles makes the half-plane model a good choice for representations which include Hyperbolic circles, but one must be wary of the distortion of the centre of such circles.
+An interesting property of the half-plane model is the appearance of circles in the model, they appear as Euclidean circles. Though this may seem strange the appearance of the circle is deceiving as its hyperbolic centre is not equivalent to its Euclidean centre. A hyperbolic circle with centre $(x,y)$ and radius $R$ is modelled by a Euclidean circle with centre $(x, y \cosh R)$ and radius $y \sinh R$. This conformance of circles makes the half-plane model a good choice for representations which include hyperbolic circles, but one must be wary of the distortion of the centre of such circles.
 
 \section{Embedding Methods}
-In order to be able to produce a visualisation of Hyperbolic space it is first necessary to determine how the chosen data lies in such a space. This process is known as \textit{embedding} and will be discussed in this section.
+In order to be able to produce a visualisation of hyperbolic space it is first necessary to determine how the chosen data lies in such a space. This process is known as \textit{embedding} and will be discussed in this section.
 
 \subsection{A Greedy Embedding Method}
 
-Cvetkovski et al. \cite{cvetkovski_hyperbolic_2009} describe a method for embedding dynamic graphs into Hyperbolic space for the purposes of routing. This implementation uses the Poincar\'{e} disc model. Focussing on trees, this method selects a root location in the space at which to place the root node of the tree subject to constraints which cause the node to be placed at an optimal location in the space. The method relies on the network nodes themselves electing a root node and subsequently forming a minimal-depth tree. The nodes accomplish this by each selecting a parent node to be the node that is the closest in hops to the root node. 
+Cvetkovski et al. \cite{cvetkovski_hyperbolic_2009} describe a method for embedding dynamic graphs into hyperbolic space for the purposes of routing. This implementation uses the Poincar\'{e} disc model. Focussing on trees, this method selects a root location in the space at which to place the root node of the tree subject to constraints which cause the node to be placed at an optimal location in the space. The method relies on the network nodes themselves electing a root node and subsequently forming a minimal-depth tree. The nodes accomplish this by each selecting a parent node to be the node that is the closest in hops to the root node. 
 
 After the nodes have identified their parents, the root node is plotted into the space at the chosen location and each node calculates its position in the embedding relative to its parent node. This calculation is performed by initialising two angles for the root node $\alpha_r = \pi$ and $\beta_r = 2\pi$ which correspond to ideal points. A node, $n$, to be placed in the embedding receives angles $\alpha_n = \alpha_p$ and $\beta_n = (\alpha_p + \beta_p) /2$ from its parent, $p$, and determines its own position in the embedding by reflecting the position of it's parent (in this case the root node) in the geodesic $G$ constructed between $\alpha_n$ and $\beta_n$ After sending $\alpha_n$ and $\beta_rn$ to the child the parent node updates the value $\alpha_p := \beta_n$. This method of updating these values ensures there is unlimited space available for the expansion of the tree. This process in then repeated for each node to form a greedy embedding. 
 
@@ -202,9 +203,9 @@ This method of creating an embedding, while offering guaranteed success due to i
 
 \subsection{H3: Large Directed Graphs in Hyperbolic Space}
 
-Munzner \cite{munzner_h3_1997} describes a method for laying out large directed graphs in Hyperbolic space. This implementation uses a three dimensional version of the Beltrami-Klein model. The method once again operates on trees but it is possible to display further links between nodes once the model has been plotted. Though a root node must be chosen and a spanning tree constructed, it is possible to use this method to visualise an undirected graph accurately. 
+Munzner \cite{munzner_h3_1997} describes a method for laying out large directed graphs in hyperbolic space. This implementation uses a three dimensional version of the Beltrami-Klein model. The method once again operates on trees but it is possible to display further links between nodes once the model has been plotted. Though a root node must be chosen and a spanning tree constructed, it is possible to use this method to visualise an undirected graph accurately. 
 
-The basis of the method uses \textit{spherical caps} to lay out the nodes in the Hyperbolic space. Each node has a cap with size proportional to the number of nodes descended from it in the tree. This includes all descendant nodes, not just immediate child nodes. These caps represent the area required to embed all descendant nodes of the node to which the cap belongs. As Hyperbolic space expands in all directions, it is possible to fit more caps of equivalent size into the space further down the tree. This allows trees with high branch factor to be embedded into the space easily.
+The basis of the method uses \textit{spherical caps} to lay out the nodes in the hyperbolic space. Each node has a cap with size proportional to the number of nodes descended from it in the tree. This includes all descendant nodes, not just immediate child nodes. These caps represent the area required to embed all descendant nodes of the node to which the cap belongs. As hyperbolic space expands in all directions, it is possible to fit more caps of equivalent size into the space further down the tree. This allows trees with high branch factor to be embedded into the space easily.
 
 The algorithm to place the caps functions recursively; it first computes the size of the caps required for all leaf nodes, which have a fixed cap size due to having no children, which is the base case for the algorithm. The algorithm then traverses back up the tree and computes the area required for the cap belonging to each node, taking into account the cap size of all child nodes. Finally, the cap size for the root node is calculated, which is the total size of the embedding. Though the size of the caps has been calculated at this point, they have not been laid out in the space, this is the next function of the algorithm, which iterates down the tree from the root node laying out each child cap of each node, until all caps have been placed. This is accomplished through \textit{sphere-packing}, a common mathematical problem outlined by Hales in 1992 \cite{hales_sphere_1992}.
 
@@ -213,16 +214,16 @@ While this method seems more appropriate than the previous one, it does present 
 \subsection{A More Mathematical Embedding Method}
 \label{sec:hyperbolic_embedding}
 
-So far, the methods discussed to perform an embedding have been of the practical, algorithmic variety. The method outlined by Wilson et al. \cite{wilson_spherical_2014} is a more mathematical method. This method uses the matrix describing the distances between points in Euclidean space, which should correspond to the distances in Hyperbolic space, to produce a embedding of points in Hyperbolic space.
+So far, the methods discussed to perform an embedding have been of the practical, algorithmic variety. The method outlined by Wilson et al. \cite{wilson_spherical_2014} is a more mathematical method. This method uses the matrix describing the distances between points in Euclidean space, which should correspond to the distances in hyperbolic space, to produce a embedding of points in hyperbolic space.
 
-This method uses the inner product of the points, defined for Hyperbolic space as: 
+This method uses the inner product of the points, defined for hyperbolic space as: 
 
 \begin{equation}
 \label{eq:inner_product_hyperbolic}
 \langle x_i,x_j\rangle = -r^2\cosh \left(\frac{d_{ij}}{r}\right)
 \end{equation}
 
-where $r$ is the radius of the embedding space and $d_{ij}$ is the distance between a pair of points $i$ and $j$. It is possible to calculate $\boldsymbol{Z}$, the inner product of the points, directly from this equation, but this is not possible immediately as the radius, $r$, is unknown. As $\boldsymbol{Z}$ is an inner product matrix of points in Hyperbolic space it should have exactly one negative eigenvalue and one zero eigenvalue. This is due to hyperbolic space having a single negative dimension. Knowing this, it is possible to minimise the magnitude of the second smallest eigenvalue to find $r$ by:
+where $r$ is the radius of the embedding space and $d_{ij}$ is the distance between a pair of points $i$ and $j$. It is possible to calculate $\boldsymbol{Z}$, the inner product of the points, directly from this equation, but this is not possible immediately as the radius, $r$, is unknown. As $\boldsymbol{Z}$ is an inner product matrix of points in hyperbolic space it should have exactly one negative eigenvalue and one zero eigenvalue. This is due to hyperbolic space having a single negative dimension. Knowing this, it is possible to minimise the magnitude of the second smallest eigenvalue to find $r$ by:
 
 \begin{equation}
 \label{eq:argmin_hyperbolic}
@@ -236,7 +237,7 @@ where $\lambda_2$ is the value of the second smallest eigenvalue of $\boldsymbol
 \boldsymbol{X}=\boldsymbol{U}_Z\boldsymbol{\Lambda}_{z||}^{\frac{1}{2}}
 \end{equation}
 
-The result of this equation is an $NxN$ matrix for which each row is a point and each column represents a dimension of the embedding. As with a standard embedding, it is possible to drop any dimensions which have negative eigenvalues, yielding a co-ordinate matrix that specifies the Hyperbolic co-ordinates of the points.
+The result of this equation is an $NxN$ matrix for which each row is a point and each column represents a dimension of the embedding. As with a standard embedding, it is possible to drop any dimensions which have negative eigenvalues, yielding a co-ordinate matrix that specifies the hyperbolic co-ordinates of the points.
 
 This method is vastly superior to those previously discussed, its primary advantage arises from the strategy of embedding using pre-existing geometric data. In the case of this project, this allows the embedding to use location data gathered for ASes without having to adapt the embedding method. Further, this method is already generalised to any number of dimensions, meaning it is possible to produce both two and three dimensional representations of the data. 
 
