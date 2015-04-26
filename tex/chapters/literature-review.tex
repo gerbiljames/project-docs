@@ -186,7 +186,7 @@ Measuring the distance between points in the half-plane model is more complex th
 arcosh\left(1+\frac{(x_2-x_1)^2+(y_2-y_1)^2}{2y_1y_2}\right)
 \end{equation}
 
-Where the points are given in the form $(x_1, x_2), (y_1, y_2)$, unlike the previous models which use pure vector mathematics. Measuring angles is simple, however, as the model is conformal, simply measuring the Euclidean angle between the tangents of the lines at the point of intersection yields the hyperbolic angle.
+Where the points are given in the form $(x_1, x_2), (y_1, y_2)$, unlike the previous models which use pure vector mathematics. Measuring angles is simple, however, as the model is conformal, simply measuring the Euclidean angle between the tangents of the lines at the point of intersection yields the hyperbolic angle. RELATED TO DISC MODEL, DONT FORGET TO DO!!!!!!!!
 
 An interesting property of the half-plane model is the appearance of circles in the model, they appear as Euclidean circles. Though this may seem strange the appearance of the circle is deceiving as its hyperbolic centre is not equivalent to its Euclidean centre. A hyperbolic circle with centre $(x,y)$ and radius $R$ is modelled by a Euclidean circle with centre $(x, y \cosh R)$ and radius $y \sinh R$. This conformance of circles makes the half-plane model a good choice for representations which include hyperbolic circles, but one must be wary of the distortion of the centre of such circles.
 
@@ -214,7 +214,7 @@ While this method seems more appropriate than the previous one, it does present 
 \subsection{A More Mathematical Embedding Method}
 \label{sec:hyperbolic_embedding}
 
-So far, the methods discussed to perform an embedding have been of the practical, algorithmic variety. The method outlined by Wilson et al. \cite{wilson_spherical_2014} is a more mathematical method. This method uses the matrix describing the distances between points in Euclidean space, which should correspond to the distances in hyperbolic space, to produce a embedding of points in hyperbolic space.
+So far, the methods discussed to perform an embedding have been of the practical, algorithmic variety. The method outlined by Wilson et al. \cite{wilson_spherical_2014} is a more mathematical method. This method uses the matrix describing the distances between points in Euclidean space, which should correspond to the distances in hyperbolic space, to produce a embedding of points in a higher dimensional space known as a Minkowski space. $N$-dimensional Minkowski space can be used to embed $(N-1)$-dimensional hyperbolic space. This extra dimension is negative and allows the hyperbolic space to represented accurately.
 
 This method uses the inner product of the points, defined for hyperbolic space as: 
 
@@ -223,22 +223,22 @@ This method uses the inner product of the points, defined for hyperbolic space a
 \langle x_i,x_j\rangle = -r^2\cosh \left(\frac{d_{ij}}{r}\right)
 \end{equation}
 
-where $r$ is the radius of the embedding space and $d_{ij}$ is the distance between a pair of points $i$ and $j$. It is possible to calculate $\boldsymbol{Z}$, the inner product of the points, directly from this equation, but this is not possible immediately as the radius, $r$, is unknown. As $\boldsymbol{Z}$ is an inner product matrix of points in hyperbolic space it should have exactly one negative eigenvalue and one zero eigenvalue. This is due to hyperbolic space having a single negative dimension. Knowing this, it is possible to minimise the magnitude of the second smallest eigenvalue to find $r$ by:
+where $r$ is the radius of the embedding space and $d_{ij}$ is the distance between a pair of points $i$ and $j$. It is possible to calculate $\boldsymbol{Z}$, the inner product of the points, directly from this equation, but this is not possible immediately as the radius, $r$, is unknown. As $\boldsymbol{Z}$ is an inner product matrix of points in the Minkowski space it should have exactly one negative eigenvalue and one zero eigenvalue. This is due to Minkowski space having a single negative dimension. Knowing this, it is possible to minimise the magnitude of the second smallest eigenvalue to find $r$ by:
 
 \begin{equation}
 \label{eq:argmin_hyperbolic}
 r^*=\underset{r}{\arg\min}|\lambda_2[\boldsymbol{Z}(r)]|
 \end{equation}
 
-where $\lambda_2$ is the value of the second smallest eigenvalue of $\boldsymbol{Z}$. Having approximated $r$ it is then possible to calculate $\boldsymbol{Z}$ using equation \ref{eq:inner_product_hyperbolic}, this then allows for the calculation of $\boldsymbol{X}$, the point matrix for a Euclidean embedding of the space, through eigendecomposition of $\boldsymbol{Z}$ to obtain a matrix of its eigenvalues, $\boldsymbol{\Lambda}$ and a matrix of its eigenvectors $\boldsymbol{U}$. It is then possible to calculate $\boldsymbol{X}$ by:
+where $\lambda_2$ is the value of the second smallest eigenvalue of $\boldsymbol{Z}$. Having approximated $r$ it is then possible to calculate $\boldsymbol{Z}$ using equation \ref{eq:inner_product_hyperbolic}, this then allows for the calculation of $\boldsymbol{X}$, the point matrix for a Minkowski embedding of the space, through eigendecomposition of $\boldsymbol{Z}$ to obtain a matrix of its eigenvalues, $\boldsymbol{\Lambda}$ and a matrix of its eigenvectors $\boldsymbol{U}$. It is then possible to calculate $\boldsymbol{X}$ by:
 
 \begin{equation}
 \label{eq:embedding_x}
 \boldsymbol{X}=\boldsymbol{U}_Z\boldsymbol{\Lambda}_{z||}^{\frac{1}{2}}
 \end{equation}
 
-The result of this equation is an $NxN$ matrix for which each row is a point and each column represents a dimension of the embedding. As with a standard embedding, it is possible to drop any dimensions which have negative eigenvalues, yielding a co-ordinate matrix that specifies the hyperbolic co-ordinates of the points.
-
+The result of this equation is an $NxN$ matrix for which each row is a point and each column represents a dimension of the embedding. From this matrix it is possible to extract the meaningful dimensions, in Minkowski space. The negative dimension is extracted by taking the column in $\boldsymbol{X}$ which corresponds to the negative eigenvalue in $\boldsymbol{Z}$. The $N-1$ positive dimensions are extracted similarly, with the $N-1$ most positive eigenvalues of $\boldsymbol{Z}$ being used. If the radius of the Minkowski space is extremely small then this method of extracting the points may be inaccurate, a more complex method is described in the original paper to combat this, but will not be described here. Having extracted the correct dimension columns from $\boldsymbol{X}$ it is then possible to perform standard vector mathematics on points to project them into the hyperbolic models described in section \ref{sec:LitReviewVisHyperbolic}.
+ 
 This method is vastly superior to those previously discussed, its primary advantage arises from the strategy of embedding using pre-existing geometric data. In the case of this project, this allows the embedding to use location data gathered for ASes without having to adapt the embedding method. Further, this method is already generalised to any number of dimensions, meaning it is possible to produce both two and three dimensional representations of the data. 
 
 \section{Haversine Formula}
