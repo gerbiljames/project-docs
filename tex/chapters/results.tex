@@ -1,0 +1,38 @@
+\chapter{Initial Findings}
+As the aim of this project is to produce visualisations and navigate these this section will demonstrate some of the visualisations produced and make comparisons between them. All of the visualisations will be produced with a reduced dataset generated using the method described in section \ref{sec:dataset_size}. The method will be run with a root of AS1 and a search degree of 3. This produces a graph of 1327 ASes. The visualisations themselves represent each AS as a square point with the origin represented as a larger point.  It is important to note that these visualisations are 3D and are difficult to fully appreciate on paper. Two dimensional visualisations will not be generated as the data is drawn from three dimensional Euclidean space, and would not be represented well by them.
+
+\section{Disc Model Visualisation}
+
+\begin{figure}
+	\label{fig:disc_no_hyperbolic}
+	\centering
+	\includegraphics[width=0.75\textwidth]{disc_no_hyperbolic}
+	\caption{A visualisation of a subset of the internet in the ball model.}
+\end{figure}
+
+Figure \ref{fig:disc_no_hyperbolic} shows a visualisation of the generated subset of ASes in the ball model. This visualisation shows the geographical structure of the internet very well with the centre of the diagram showing the outline of the USA very clearly. The model is not perfectly spherical most likely due to mismatches in the location data between IP addresses and actual AS locations. The method has successfully embedded the data given into hyperbolic space, but the properties of the space itself have not been exploited. As the initial data is drawn from Euclidean space it is represented accurately without the need for hyperbolic space. It would seem that some tweaking of the input data is required for this model.
+
+\section{Projective Model Visualisation}
+
+\begin{figure}
+	\label{fig:klein_no_hyperbolic}
+	\centering
+	\includegraphics[width=0.75\textwidth]{klein_no_hyperbolic}
+	\caption{A visualisation of a subset of the internet in the projective model.}
+\end{figure}
+
+Figure \ref{fig:klein_no_hyperbolic} shows a visualisation of the generated subset of ASes in the projective model. Once again the physical structure of the internet is well represented but the shape is distorted for the same reasons. This visualisation is remarkably similar to the ball model from figure \ref{fig:disc_no_hyperbolic} due to how the two models represent hyperbolic space in the unit ball. Indeed, as the only difference between these models is how the space is bent there should be little difference between them. Again, this model does not show anything that cannot be shown using Euclidean space.
+
+An interesting note about both the ball and projective models 
+
+\section{Half-Plane Model Visualisation}
+
+\begin{figure}
+	\label{fig:upper_no_hyperbolic}
+	\centering
+	\includegraphics[width=0.75\textwidth]{upper_no_hyperbolic}
+	\caption{A visualisation of a subset of the internet in the half-plane model.}
+\end{figure}
+
+Figure \ref{fig:upper_no_hyperbolic} shows a visualisation of the generated subset of ASes in the half-plane model. This model produces very different results to the others but still shows the physical structure of the internet, though it is more difficult to make out. The USA is visible as a dense patch of ASes in the middle of the main set. An interesting note is how far from the origin the ASes are translated in this model, whereas in the previous two it was inside the \textit{sphere} they formed. This translation makes the model somewhat less useful for showing this type of data. Indeed, the other two models are much better as they are represented in the unit ball to begin with.
+

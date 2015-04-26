@@ -114,7 +114,7 @@ where P and Q are the ideal points of the geodesic that bisects A and B. These p
 
 where |PQ|, for example, is the Euclidean arc length between the points P and Q on the Euclidean representation of the hyperbolic line which intersects A and B.
 
-The further an object is from the centre of the space the more compressed it's Euclidean representation becomes, making it appear smaller. Objects near the centre of the space are represented more accurately as the compression of the hyperbolic space is low there.
+The further an object is from the centre of the space the more compressed it's Euclidean representation becomes, making it appear smaller. Objects near the centre of the space are represented more accurately as the compression of the hyperbolic space is low there. The disc model can also be expanded to represent three dimensional hyperbolic space, in which it is called the \textit{ball model}, as it it represented inside the unit ball rather than disc.
 
 \subsection{The Beltrami-Klein Model}
 
@@ -125,7 +125,7 @@ The projective model is again defined in two-dimensional Euclidean space as the 
 The method for calculating distance in the projective model differs slightly from the disc model and the distance between points A and B is defined as \cite{milnor_hyperbolic_1982}:
 
 \begin{equation}
-\label{distance_disc_model}
+\label{distance_projective_model}
 \frac{1}{2}\log(AB,PQ)
 \end{equation}
 
@@ -182,11 +182,28 @@ Figure \ref{fig:half-plane-example} shows an example of the half-plane model in 
 Measuring the distance between points in the half-plane model is more complex than the previous two and is defined as \cite{kubo_geometry_1988}:
 
 \begin{equation}
-\label{half_plane_distance}
+\label{eq:half_plane_distance}
 arcosh\left(1+\frac{(x_2-x_1)^2+(y_2-y_1)^2}{2y_1y_2}\right)
 \end{equation}
 
-Where the points are given in the form $(x_1, x_2), (y_1, y_2)$, unlike the previous models which use pure vector mathematics. Measuring angles is simple, however, as the model is conformal, simply measuring the Euclidean angle between the tangents of the lines at the point of intersection yields the hyperbolic angle. RELATED TO DISC MODEL, DONT FORGET TO DO!!!!!!!!
+Where the points are given in the form $(x_1, x_2), (y_1, y_2)$, unlike the previous models which use pure vector mathematics. Measuring angles is simple, however, as the model is conformal, simply measuring the Euclidean angle between the tangents of the lines at the point of intersection yields the hyperbolic angle.
+
+A conversion exists from points in the disc model to points in the half-plane model and is given for a two dimensional vector $x$ by:
+
+\begin{equation}
+\label{eq:disc_to_plane}
+\frac{2}{1-2x_n+\|x\|^2}
+\begin{pmatrix}
+x_1\\
+1-x_2
+\end{pmatrix}
+- \begin{pmatrix}
+0\\
+1
+\end{pmatrix}
+\end{equation}
+
+This conversion complements the other conversions that exist for the disc model to the projective model, effectively making the disc model a good base for conversions to the other models.
 
 An interesting property of the half-plane model is the appearance of circles in the model, they appear as Euclidean circles. Though this may seem strange the appearance of the circle is deceiving as its hyperbolic centre is not equivalent to its Euclidean centre. A hyperbolic circle with centre $(x,y)$ and radius $R$ is modelled by a Euclidean circle with centre $(x, y \cosh R)$ and radius $y \sinh R$. This conformance of circles makes the half-plane model a good choice for representations which include hyperbolic circles, but one must be wary of the distortion of the centre of such circles.
 

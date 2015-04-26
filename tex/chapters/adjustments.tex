@@ -1,0 +1,40 @@
+\chapter{Adjustments to the Embeddings}
+
+\section{Adjusting the Data}
+\label{sec:adjusting}
+
+It would seem that while the embedding and visualisation techniques work, the data itself is not appropriate for display in this way. This is due to it being drawn from Euclidean space originally; the data cannot possibly require a hyperbolic space to be visualised properly. As this results section aims to demonstrate that useful visualisations can be produced it is necessary to perform some modification to the input data which causes useful visualisations to be produced. 
+
+One such modification could be made to the distance matrix itself, though the distances are being drawn from euclidean space it is possible to use information about each AS to augment this data to produce a distance matrix which can only be represented in hyperbolic space, or would be better represented in this way. It has been established that the hierarchical nature of the internet is what makes hyperbolic space a good candidate for representing it, therefore adding some measure of the difference in hierarchical level of the ASes to the distance matrix could produce some useful results. 
+
+Given the available data it is possible to calculate the difference in degree between ASes, which gives an indication in their tier separation as higher tier ASes tend to link to many lower tier ASes which in turn link to fewer ASes themselves. By subtracting a factor of degree separation from the distance calculation higher-tier ASes are effectively pulled nearer to the origin of the space. This effect occurs due to there being less space to cover near the origin in hyperbolic space coupled with the distance measurement being smaller for ASes of vastly differing degrees. 
+
+\begin{figure}
+	\label{fig:distance_new_klein}
+	\centering
+	\includegraphics[width=0.75\textwidth]{distance_new_klein}
+	\caption{A visualisation of a subset of the internet in the projective model with a modified distance calculation that accounts for degree separation.}
+\end{figure}
+
+Figure \ref{fig:distance_new_klein} shows a visualisation of the generated subset of ASes in the projective model, which uses this new distance calculation. The USA is visible on the left of the image and clearly some higher degree ASes have been \textit{pulled} further towards the origin. As these nodes represent the important backbone of the internet this visualisation is very useful; it gives a geographical view of where the high degree nodes on the internet reside while also representing how important they are in their distance from the origin. 
+
+This modification is extremely important for the aims of this project as it has produced a useful visualisation of the internet which uses the properties of hyperbolic space to show more information than can be shown easily in Euclidean space. 
+
+\section{Adding AS Links}
+\label{sec:adding_links}
+
+Though data was collected about the links between ASes it has not been used in any visualisation yet. As this data is available it would be unwise to simply ignore it. The AS links will be added to the visualisation generated in section \ref{sec:adjusting} as this is the most interesting visualisation generated. 
+
+\begin{figure}
+	\label{fig:with_links}
+	\centering
+	\includegraphics[width=0.75\textwidth]{klein_with_links}
+	\caption{A visualisation of a subset of the internet in the projective model with links between ASes shown.}
+\end{figure}
+
+Figure \ref{fig:with_links} shows a visualisation of the generated subset of ASes in the projective model, with links between ASes shown. Peer-peer connections are shown in red and provider-customer connections are green. While the addition of the links does add more information to the visualisation; it makes it very difficult to see the most important ASes which reside near the origin. Though some ASes with very high degree are visible due to the sheer number of links they have.
+
+Instead of augmenting the visualisation the links actually do more to expose its flaws. In the top right of the image there is a peer-peer link that terminates at an AS which appears to have no other links. This is an odd depiction as surely this AS must have some customers if it has a peer-peer link with another AS? This has exposed a flaw in the method used to generate the subset of ASes for embedding. As this method follows the links from a chosen root node for a number of \textit{hops} it is possible for it to get to a node with very high degree and stop there. This means the method fails to include important subgraphs of the internet due to them being too far away from the original AS. 
+
+The addition of the links also reveals a further issue, it would appear that many ASes are connected to those that are extremely far away. This is not an issue in the distance calculation itself but does reveal a problem in the way locations are determined. As the location of an AS is determined by one of its registered IP addresses it is possible for ASes to actually be in a completely different place. IP address geolocation was the only option for the location of ASes in this project but if a more reliable way of performing this was found the visualisations would be improved. 
+

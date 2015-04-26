@@ -68,14 +68,15 @@ Once this list of IP addresses is obtained it is then possible to determine the 
 This section aims to outline any further data considerations which were raised during development of this project.
 
 \subsection{Dataset Size}
+\label{sec:dataset_size}
 
 Upon inspecting the datasets chosen for this project it became apparent that volume of data available was very large. Due to the calculations that must be performed in order to create an embedding a very large amount of memory is required. This is not feasible as access to a machine with enough RAM is not possible, therefore one of two workarounds must be employed: either store the data somewhere other than RAM or reduce the size of the data. 
 
 The specific point in the application at which the data becomes very large will occur when calculating the distance matrix for all ASes. This matrix will be square with dimensions equal to the number of ASes. Attempts must be made to reduce the size of this matrix or the aims of the project cannot be fulfilled.
 
-Storing the data outside of RAM would seem difficult in this case, but it is possible. In order to implement such a system in Python, a technology called Hierarchical Data Format (HDF) can be used. This allows for the creation of disk backed variable storage within Python that acts as though the object is stored in RAM. Access to the data would of course be slower than traditional variables but RAM is no longer a constraint. However, as the data being stored is a matrix it must support all of the numpy matrix operators. While the Python bindings for HDF (h5py) do support numpy, they do not support performing matrix operations on data backed by HDF. HDF is not a viable candidate to solve this problem for this reason.
+Storing the data outside of RAM would seem difficult in this case, but it is possible. In order to implement such a system in Python, a technology called Hierarchical Data Format (HDF) can be used. This allows for the creation of disk backed variable storage within Python that acts as though the object is stored in RAM. Access to the data would of course be slower than traditional variables but RAM is no longer a constraint. However, as the data being stored is a matrix it must support all of the NumPy matrix operators. While the Python bindings for HDF (h5py) do support NumPy, they do not support performing matrix operations on data backed by HDF. HDF is not a viable candidate to solve this problem for this reason.
 
-While moving the data out of RAM may seem like a convenient solution, it is impossible to maintain compatibility with numpy while performing such an abstraction. Instead it would be easier to attempt to minimise or compress the data.The scipy library contains a \textit{sparse} matrix class which is effectively compressed and performs very well on matrices which contain many occurrences of the same value. Unfortunately, it is extremely inefficient to modify such a matrix heavily once it has been created which is a feature required for the construction of an embedding. 
+While moving the data out of RAM may seem like a convenient solution, it is impossible to maintain compatibility with NumPy while performing such an abstraction. Instead it would be easier to attempt to minimise or compress the data.The SciPy library contains a \textit{sparse} matrix class which is effectively compressed and performs very well on matrices which contain many occurrences of the same value. Unfortunately, it is extremely inefficient to modify such a matrix heavily once it has been created which is a feature required for the construction of an embedding. 
 
 Having exhausted all other lines of enquiry it is necessary to consider using a smaller dataset than initially intended. Unfortunately, this is not as simple as only using the first 1000 ASes, for example, as it is possible (though unlikely) for no relationships to exist between any of those ASes. Instead, the subset must be chosen carefully so as to eliminate any ASes which have zero links to the rest of the subset. One system which could be used to achieve this would be to follow the links from a specific AS to a set depth and use all ASes found as a subset. This could be implemented recursively and would provide a consistent way to generate small subsets of the main dataset.
 
@@ -123,11 +124,11 @@ Though $\boldsymbol{X}$ is able to be calculated, this does not yield the co-ord
 
 \subsection{Conversion to the Ball Model}
 
-Though it has not been discussed, there is a further model of hyperbolic space known as the hyperboloid model. This model represents $N$-dimensional hyperbolic space in an $(N+1)$-dimensional space, as discussed in section \ref{sec:hyperbolic_embedding}. Of course, the hyperbolic data in this project is in three dimensions, producing a four dimensional embedding, which is impossible to imagine in three dimensional space. Instead the embedding must be projected into three dimensional space in order to be able to produce meaningful visualisations. 
+Though it has not yet been discussed, there is a further model of hyperbolic space known as the hyperboloid model. The embedding returned from the MATLAB embedding code is in this form. This model represents $N$-dimensional hyperbolic space in an $(N+1)$-dimensional space, as discussed in section \ref{sec:hyperbolic_embedding}. Of course, the hyperbolic data in this project is in three dimensions, producing a four dimensional embedding, which is impossible to imagine in three dimensional space. Instead the embedding must be projected into three dimensional space in order to be able to produce meaningful visualisations. 
 
 The Poincar\'{e} disc model, discussed earlier in section \ref{sec:discmodel} is a two dimensional representation of hyperbolic space, represented in two dimensional Euclidean space. There is a three dimensional version of this model, in which the disc is expanded into a sphere, and which represents three dimensional hyperbolic space. The model has similar behaviour as its two dimensional counterpart and is known as the \textit{Ball model}. Having the point data in this form would greatly simplify conversion to the other two models discussed in section \ref{sec:LitReviewVisHyperbolic}. 
 
-In order to convert the four dimensional hyperboloid model to the three dimensional Ball model, it is necessary to project the higher dimensional space onto the lower one. In this case if the projection is through the point $(-1, 0, 0, 0)$ it will produce coordinates in the Ball model. This projection can be performed for a four dimensional point $\boldsymbol{x}$ as follows:
+In order to convert the four dimensional hyperboloid model to the three dimensional Ball model, it is necessary to project the higher dimensional space onto the lower one. In this case, if the projection is through the point $(-1, 0, 0, 0)$ it will produce coordinates in the Ball model. This projection can be performed for a four dimensional point $\boldsymbol{x}$ as follows:
 
 \begin{equation}
 \frac{1}{x_0 + 1}
@@ -139,6 +140,30 @@ x_3 \\
 \end{equation}
 
 Implementing this in python is trivial using NumPy and looping through each co-ordinate. After the projection has been performed it is possible to plot the returned co-ordinates in three dimensional space. 
+
+\subsection{Conversion to the Projective Model}
+
+Now that the points have been converted to the ball model, conversion to the projective model is simple. As point co-ordinates are effectively vectors with origin $(0,0,0)$ in three dimensional space. Knowing this, it is trivial to convert co-ordinates in the ball model (which is equivalent to the disc model) to the projective model. To do this, equation \ref{disc_to_projective} must be implemented and performed for each co-ordinate in the ball model representation. The produced co-ordinates are ready to plot in Euclidean space.
+
+\subsection{Conversion to the Half-Plane Model}
+As discussed earlier, a conversion exists from the two dimensional disc model to the half-plane model described in equation \ref{eq:disc_to_plane}. This equation can be expanded to three dimensions for a point vector $x$ as follows:
+
+\begin{equation}
+\label{eq:disc_to_plane3}
+\frac{2}{1-2x_n+\|x\|^2}
+\begin{pmatrix}
+x_1\\
+x_2\\
+1-x_3
+\end{pmatrix}
+- \begin{pmatrix}
+0\\
+0\\
+1
+\end{pmatrix}
+\end{equation}
+
+This allows for conversion of points in the ball model to the half-plane model and completes the suite of conversions required for all models to be reachable.
 
 \section{Displaying Visualisations}
 As the aim of this project is to produce visualisations it is necessary to perform some kind of 3D graphics programming. As co-ordinates in three dimensions have already been obtained the conversion to a visualisation should be trivial. A choice must be made, however, regarding the library to use for the graphics programming. 
